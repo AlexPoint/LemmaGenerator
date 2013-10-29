@@ -11,13 +11,13 @@ namespace LemmaSharp {
     /// </summary>
     [Serializable()]
     public class LemmatizerSettings : ISerializable {
-        #region Constructor(s) & Destructor(s)
+        
+        // Constructor(s) & Destructor(s) -------------------
 
         public LemmatizerSettings() { } 
 
-        #endregion
-
-        #region Sub-Structures
+        
+        // Sub-Structures ----------------------------------
 
         /// <summary>
         /// How algorithm considers msd tags.
@@ -44,10 +44,9 @@ namespace LemmaSharp {
             /// </summary>
             JoinSameSubstring
         }         
+        
 
-        #endregion
-
-        #region Public Variables
+        // Public Variables --------------------------------
 
         /// <summary>
         /// True if from string should be included in rule identifier ([from]->[to]). False if just length of from string is used ([#len]->[to]).
@@ -66,9 +65,8 @@ namespace LemmaSharp {
         /// </summary>
         public bool bBuildFrontLemmatizer = false;
 
-        #endregion
-
-        #region Cloneable functions
+        
+        // Cloneable functions --------------------------------
 
         public LemmatizerSettings CloneDeep() {
             return new LemmatizerSettings() {
@@ -78,10 +76,9 @@ namespace LemmaSharp {
                 bBuildFrontLemmatizer = this.bBuildFrontLemmatizer                
             };            
         }
+        
 
-        #endregion
-
-        #region Serialization Functions (ISerializable)
+        // Serialization Functions (ISerializable) -----------
 
         public void GetObjectData(SerializationInfo info, StreamingContext context) {
             info.AddValue("bUseFromInRules", bUseFromInRules);
@@ -96,8 +93,8 @@ namespace LemmaSharp {
             bBuildFrontLemmatizer = info.GetBoolean("bBuildFrontLemmatizer");
         }
 
-        #endregion
-        #region Serialization Functions (Binary)
+        
+        // Serialization Functions (Binary) -----------------
 
         public void Serialize(BinaryWriter binWrt) {
             binWrt.Write(bUseFromInRules);
@@ -115,8 +112,8 @@ namespace LemmaSharp {
             this.Deserialize(binRead);
         }
 
-        #endregion
-        #region Serialization Functions (Latino)
+        
+        // Serialization Functions (Latino) -----------------
         
         #if LATINO
 
@@ -140,7 +137,7 @@ namespace LemmaSharp {
 
     #endif
 
-        #endregion
+        
 
     }
 }

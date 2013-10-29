@@ -6,7 +6,8 @@ using System.IO;
 namespace LemmaSharp {
     [Serializable()]
     public class LemmaTreeNode : ILemmatizerModel {
-        #region Private Variables
+        
+        // Private Variables ---------------------------------
 
         //settings
         private LemmatizerSettings lsett; 
@@ -30,9 +31,8 @@ namespace LemmaSharp {
         private int iEnd;
         private ExampleList elExamples;
 
-        #endregion
-
-        #region Constructor(s) & Destructor(s)
+        
+        // Constructor(s) & Destructor(s) -------------------
 
         private LemmaTreeNode(LemmatizerSettings lsett) {
             this.lsett = lsett;
@@ -95,9 +95,8 @@ namespace LemmaSharp {
 
         }
 
-        #endregion
-
-        #region Public Properties
+        
+        // Public Properties ------------------------------
 
         public int TreeSize {
             get {
@@ -114,9 +113,8 @@ namespace LemmaSharp {
             }
         }
 
-        #endregion
-
-        #region Essential Class Functions (building model)
+        
+        // Essential Class Functions (building model) ----
 
         private void FindBestRules() {
             /*
@@ -240,8 +238,8 @@ namespace LemmaSharp {
             dictSubNodes.Add(chChar, ltnSub);
         }
 
-        #endregion
-        #region Essential Class Functions (running model = lemmatizing)
+        
+        // Essential Class Functions (running model = lemmatizing) --------
 
         public bool ConditionSatisfied(string sWord) {
             //if (bWholeWord)
@@ -268,10 +266,9 @@ namespace LemmaSharp {
             
             return lrBestRule.Lemmatize(sWord);
         }
+        
 
-        #endregion
-
-        #region Output Functions (ToString)
+        // Output Functions (ToString) ---------------
 
         public override string ToString() {
             StringBuilder sb = new StringBuilder();
@@ -296,10 +293,9 @@ namespace LemmaSharp {
                 foreach (LemmaTreeNode ltnChild in dictSubNodes.Values)
                     ltnChild.ToString(sb, iLevel + 1);
         }
+        
 
-        #endregion
-
-        #region Serialization Functions (Binary)
+        // Serialization Functions (Binary) ---------
 
         public void Serialize(BinaryWriter binWrt) {
             binWrt.Write(dictSubNodes != null);
@@ -364,8 +360,8 @@ namespace LemmaSharp {
             Deserialize(binRead, lsett, elExamples, ltnParentNode);
         }
 
-        #endregion
-        #region Serialization Functions (Latino)
+        
+        // Serialization Functions (Latino) ---------
         #if LATINO
 
         public void Save(Latino.BinarySerializer binWrt) {
@@ -433,9 +429,9 @@ namespace LemmaSharp {
         }
 
         #endif
-        #endregion
+        
 
-        #region Other (Temporarly)
+        // Other (Temporarly)
 
         //TODO - this is temp function, remove it
         public bool CheckConsistency() {
@@ -448,6 +444,6 @@ namespace LemmaSharp {
             return bReturn;
         }
 
-        #endregion
+        
     }
 }

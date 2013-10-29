@@ -7,16 +7,16 @@ using System.Runtime.Serialization;
 namespace LemmaSharp {
     [Serializable()]
     public class ExampleList : ISerializable {
-        #region Private Variables
+        
+        // Private Variables ----------------------------------
 
         private LemmatizerSettings lsett;
         private RuleList rlRules;
         private Dictionary<string, LemmaExample> dictExamples;
         private List<LemmaExample> lstExamples;
 
-        #endregion
 
-        #region Constructor(s) & Destructor(s)
+        // Constructor(s) & Destructor(s) --------------------
 
         public ExampleList(LemmatizerSettings lsett): base() {
             this.lsett = lsett;
@@ -29,9 +29,8 @@ namespace LemmaSharp {
             AddMultextFile(srIn, sFormat);
         }
         
-        #endregion
         
-        #region Public Properties & Indexers
+        // Public Properties & Indexers ---------------------
 
         public LemmaExample this[int i] {
             get {
@@ -69,9 +68,8 @@ namespace LemmaSharp {
             }
         }
 
-        #endregion
-
-        #region Essential Class Functions (adding/removing examples)
+        
+        // Essential Class Functions (adding/removing examples) ---------
 
         public void AddMultextFile(StreamReader srIn, string sFormat) {
             //read from file
@@ -158,9 +156,8 @@ namespace LemmaSharp {
             return elExamplesNew;
         }
 
-        #endregion
-
-        #region Output Functions (ToString)
+        
+        // Output Functions (ToString) --------------------------
 
         public override string ToString() {
             StringBuilder sb = new StringBuilder();
@@ -172,9 +169,8 @@ namespace LemmaSharp {
             return sb.ToString();
         }
 
-        #endregion
-
-        #region Serialization Functions (.Net Default - ISerializable)
+        
+        // Serialization Functions (.Net Default - ISerializable) ----
 
         public void GetObjectData(SerializationInfo info, StreamingContext context) {
             
@@ -216,8 +212,8 @@ namespace LemmaSharp {
                 AddExample(aWords[iExm], aLemmas[iExm], aWeights[iExm], aMsds[iExm]);
         }
 
-        #endregion
-        #region Serialization Functions (Binary)
+        
+        // Serialization Functions (Binary) -----------------------
 
         public void Serialize(BinaryWriter binWrt, bool bSerializeExamples, bool bThisTopObject) {
             //save metadata
@@ -291,8 +287,8 @@ namespace LemmaSharp {
             Deserialize(binRead, lsett);
         }
 
-        #endregion
-        #region Serialization Functions (Latino)
+        
+        // Serialization Functions (Latino) -------------------
 
         #if LATINO
 
@@ -372,7 +368,6 @@ namespace LemmaSharp {
 
         #endif
 
-        #endregion
 
     }
 }

@@ -6,7 +6,8 @@ using System.Runtime.Serialization;
 
 namespace LemmaSharp {
     public class LemmaRule {
-        #region Private Variables
+
+        // Private Variables -----------------------
 
         private int iId;
         private int iFrom;
@@ -14,10 +15,9 @@ namespace LemmaSharp {
         private string sTo;
         private string sSignature;
         private LemmatizerSettings lsett;
+        
 
-        #endregion
-
-        #region Constructor(s) & Destructor(s)
+        // Constructor(s) & Destructor(s) ---------
 
         public LemmaRule(string sWord, string sLemma, int iId, LemmatizerSettings lsett) {
             this.lsett = lsett;
@@ -36,10 +36,9 @@ namespace LemmaSharp {
                 sSignature = "[#" + iFrom + "]==>[" + sTo + "]";
             }
         }
+        
 
-        #endregion
-
-        #region Public Properties
+        // Public Properties ---------------------
 
         public string Signature {
             get {
@@ -51,10 +50,9 @@ namespace LemmaSharp {
                 return iId;
             }
         }
+        
 
-        #endregion
-
-        #region Essential Class Functions
+        // Essential Class Functions -------------
 
         private static int SameStem(string sStr1, string sStr2) {
             int iLen1 = sStr1.Length;
@@ -72,18 +70,16 @@ namespace LemmaSharp {
         public string Lemmatize(string sWord) {
             return sWord.Substring(0, sWord.Length - iFrom) + sTo;
         }
+        
 
-        #endregion
-
-        #region Output Functions (ToString)
+        // Output Functions (ToString) ----------
 
         public override string ToString() {
             return iId + ":" + sSignature;
         }
+        
 
-        #endregion
-
-        #region Serialization Functions (Binary)
+        // Serialization Functions (Binary) -----
 
         public void Serialize(BinaryWriter binWrt, bool bThisTopObject) {
             //save metadata
@@ -127,9 +123,9 @@ namespace LemmaSharp {
         public LemmaRule(System.IO.BinaryReader binRead, LemmatizerSettings lsett) {
             this.Deserialize(binRead, lsett);
         }
+        
 
-        #endregion
-        #region Serialization Functions (Latino)
+        // Serialization Functions (Latino) -----
         #if LATINO
 
         public void Save(Latino.BinarySerializer binWrt, bool bThisTopObject) {
@@ -176,6 +172,6 @@ namespace LemmaSharp {
         }
 
         #endif
-        #endregion
+        
     }
 }

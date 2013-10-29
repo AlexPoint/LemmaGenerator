@@ -6,33 +6,31 @@ using System.Runtime.Serialization;
 
 namespace LemmaSharp {
     public class RuleList : Dictionary<string, LemmaRule> {
-        #region Private Variables
+
+        // Private Variables ------------------------
 
         private LemmatizerSettings lsett;
         private LemmaRule lrDefaultRule;
-
-        #endregion
         
-        #region Constructor(s) & Destructor(s)
+        
+        // Constructor(s) & Destructor(s) ------------
 
         public RuleList(LemmatizerSettings lsett) {
             this.lsett = lsett;
             lrDefaultRule = AddRule(new LemmaRule("", "", 0, lsett));
         }
 
-        #endregion
-
-        #region Public Properties
+        
+        // Public Properties -----------------------
 
         public LemmaRule DefaultRule {
             get {
                 return lrDefaultRule;
             }
         }
+        
 
-        #endregion
-
-        #region Essential Class Functions
+        // Essential Class Functions --------------
 
         public LemmaRule AddRule(LemmaExample le) {
             return AddRule(new LemmaRule(le.Word, le.Lemma, this.Count, lsett));
@@ -47,10 +45,9 @@ namespace LemmaSharp {
 
             return lrRuleReturn;
         }
-
-        #endregion       
+        
      
-        #region Serialization Functions (Binary)
+        // Serialization Functions (Binary) ------
         
         public void Serialize(BinaryWriter binWrt, bool bThisTopObject) {
             //save metadata
@@ -101,8 +98,8 @@ namespace LemmaSharp {
             this.Deserialize(binRead, lsett);
         }
 
-        #endregion
-        #region Serialization Functions (Latino)
+        
+        // Serialization Functions (Latino) ------
         #if LATINO
 
         public void Save(Latino.BinarySerializer binWrt, bool bThisTopObject) {
@@ -156,6 +153,6 @@ namespace LemmaSharp {
         }
 
         #endif
-        #endregion
+        
     }
 }

@@ -7,7 +7,8 @@ using System.Runtime.Serialization;
 
 namespace LemmaSharp {
     public class LemmaExample : IComparable<LemmaExample>, IComparer<LemmaExample> {
-        #region Private Variables
+        
+        // Private Variables ----------------------
 
         private string sWord;
         private string sLemma;
@@ -21,9 +22,8 @@ namespace LemmaSharp {
         private string sWordFrontCache;
         private string sLemmaFrontCache;
 
-        #endregion
-
-        #region Constructor(s) & Destructor(s)
+        
+        // Constructor(s) & Destructor(s) ---------
 
         public LemmaExample(string sWord, string sLemma, double dWeight, string sMsd, RuleList rlRules, LemmatizerSettings lsett) {
             this.lsett = lsett;
@@ -53,9 +53,8 @@ namespace LemmaSharp {
 
         }
 
-        #endregion
-
-        #region Public Properties
+        
+        // Public Properties ---------------------
 
         public string Word {
             get {
@@ -129,11 +128,9 @@ namespace LemmaSharp {
                 return sLemma;
             }
         }
+        
 
-
-        #endregion
-
-        #region Essential Class Functions (joining two examples into one)
+        // Essential Class Functions (joining two examples into one) --------------
 
         //TODO - this function is not totaly ok because sMsd should not be changed since it could be included in signature
         public void Join(LemmaExample leJoin) {
@@ -165,8 +162,8 @@ namespace LemmaSharp {
 
         }
 
-        #endregion
-        #region Essential Class Functions (calculating similarities betwen examples)
+        
+        // Essential Class Functions (calculating similarities betwen examples) -------
 
         public int Similarity(LemmaExample le) {
             return Similarity(this, le);
@@ -188,8 +185,8 @@ namespace LemmaSharp {
             return iMaxLen;
         }
 
-        #endregion
-        #region Essential Class Functions (comparing examples - eg.: for sorting)
+        
+        // Essential Class Functions (comparing examples - eg.: for sorting) -------------
         /// <summary>
         /// Function used to comprare current MultextExample (ME) against argument ME.
         /// Mainly used in for sorting lists of MEs.
@@ -284,12 +281,7 @@ namespace LemmaSharp {
         } 
 
         
-
-
-
-        #endregion
-
-        #region Output Functions (ToString)
+        // Output Functions (ToString) -------------------
 
         public override string ToString() {
             string sThis =
@@ -302,9 +294,8 @@ namespace LemmaSharp {
             return String.IsNullOrEmpty(sThis) ? "" : sThis.Substring(0, sThis.Length - 1);
         }
 
-        #endregion
 
-        #region Serialization Functions (Binary)
+        // Serialization Functions (Binary) --------------
 
         public void Serialize(BinaryWriter binWrt, bool bThisTopObject) {
             //save metadata
@@ -361,8 +352,8 @@ namespace LemmaSharp {
             Deserialize(binRead, lsett, lrRule);
         }
 
-        #endregion
-        #region Serialization Functions (Latino)
+
+        // Serialization Functions (Latino) ---------------
         #if LATINO
 
         public void Save(Latino.BinarySerializer binWrt, bool bThisTopObject) {
@@ -417,7 +408,6 @@ namespace LemmaSharp {
         }
 
         #endif
-        #endregion
     }
 }
 

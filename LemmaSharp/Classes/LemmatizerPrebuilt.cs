@@ -41,7 +41,7 @@ namespace LemmaSharp {
     [Serializable()]
     public abstract class LemmatizerPrebuilt : Lemmatizer {
 
-        #region Private Variables
+        // Private Variables --------------------------------
 
         private static string[] asLangMapping = new string[] {
             "bg", "mlteast",
@@ -67,10 +67,9 @@ namespace LemmaSharp {
         };
 
         private LanguagePrebuilt lang;
+        
 
-        #endregion
-
-        #region Constructor(s) & Destructor(s)
+        // Constructor(s) & Destructor(s) ----------------------
 
         public LemmatizerPrebuilt(LanguagePrebuilt lang)
             : base() {
@@ -82,9 +81,8 @@ namespace LemmaSharp {
             this.lang = lang;
         }
 
-        #endregion
-
-        #region Private Properties Helping Functions
+        
+        // Private Properties Helping Functions ---------------
 
         protected string GetResourceFileName(string sFileMask) {
             return GetResourceFileName(sFileMask, lang);
@@ -94,10 +92,9 @@ namespace LemmaSharp {
             string langFileName = asLangMapping[(int)lang * 2 + 1] + '-' +asLangMapping[(int)lang * 2];
             return String.Format(sFileMask, langFileName);
         }
+        
 
-        #endregion
-
-        #region Public Properties
+        // Public Properties ----------------------------------
 
         public LanguagePrebuilt Language {
             get{
@@ -111,19 +108,17 @@ namespace LemmaSharp {
                 return GetLexicon(lang);
             }
         }
+        
 
-        #endregion
-
-        #region Public Properties
+        // Public Properties ---------------------------------
 
         public static LexiconPrebuilt GetLexicon(LanguagePrebuilt lang)
         {
             return (LexiconPrebuilt)Enum.Parse(typeof(LexiconPrebuilt), asLangMapping[((int)lang) * 2 + 1], true);
         }
 
-        #endregion
-
-        #region Resource Management Functions
+        
+        // Resource Management Functions --------------------
 
         protected abstract Assembly GetExecutingAssembly();
 
@@ -141,16 +136,15 @@ namespace LemmaSharp {
 
             return assembly.GetManifestResourceStream(sResourceName);
         }
+        
 
-        #endregion
-
-        #region Serialization Functions
+        // Serialization Functions -------------------------
 
         public LemmatizerPrebuilt(SerializationInfo info, StreamingContext context)
             : base(info, context) {
         }
 
-        #endregion
+        
 
     }
 

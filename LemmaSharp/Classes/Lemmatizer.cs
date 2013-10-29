@@ -14,16 +14,15 @@ namespace LemmaSharp {
         #endif 
         {
 
-        #region Private Variables
+        // Private Variables -------------------
 
         protected LemmatizerSettings lsett;
         protected ExampleList elExamples;
         protected LemmaTreeNode ltnRootNode;
         protected LemmaTreeNode ltnRootNodeFront;
+        
 
-        #endregion
-
-        #region Constructor(s) & Destructor(s)
+        // Constructor(s) & Destructor(s) ------
 
         public Lemmatizer() : this(new LemmatizerSettings()) { }
         public Lemmatizer(LemmatizerSettings lsett) { 
@@ -36,10 +35,9 @@ namespace LemmaSharp {
         public Lemmatizer(StreamReader srIn, string sFormat, LemmatizerSettings lsett): this(lsett) {
             AddMultextFile(srIn, sFormat);
         }
+        
 
-        #endregion
-
-        #region Private Properties
+        // Private Properties -----------------
 
         private LemmaTreeNode ltrRootNodeSafe {
             get {
@@ -54,8 +52,8 @@ namespace LemmaSharp {
             }
         }
 
-        #endregion
-        #region Public Properties
+        
+        // Public Properties ------------------
 
         public LemmatizerSettings Settings{
             get{
@@ -88,9 +86,8 @@ namespace LemmaSharp {
             }
         }
 
-        #endregion
-
-        #region Essential Class Functions (adding examples to repository)
+        
+        // Essential Class Functions (adding examples to repository) ----------
 
         public void AddMultextFile(StreamReader srIn, string sFormat) {
             this.elExamples.AddMultextFile(srIn, sFormat);
@@ -114,8 +111,8 @@ namespace LemmaSharp {
             elExamples.FinalizeAdditions();
         }
 
-        #endregion
-        #region Essential Class Functions (building model & lemmatizing)
+        
+        // Essential Class Functions (building model & lemmatizing) ----------
 
         public void BuildModel() {
             if (ltnRootNode != null) return;
@@ -141,10 +138,9 @@ namespace LemmaSharp {
                 return ltrRootNodeSafe.Lemmatize(sWordRear);
             }
         }
+        
 
-        #endregion
-
-        #region Serialization Functions (ISerializable)
+        // Serialization Functions (ISerializable) ---------------------------
 
         public void GetObjectData(SerializationInfo info, StreamingContext context) {
             info.AddValue("lsett", lsett);
@@ -156,8 +152,8 @@ namespace LemmaSharp {
             this.BuildModel();
         }
 
-        #endregion
-        #region Serialization Functions (Binary)
+        
+        // Serialization Functions (Binary) ------------
 
         public void Serialize(BinaryWriter binWrt, bool bSerializeExamples) {
             lsett.Serialize(binWrt);
@@ -349,9 +345,8 @@ namespace LemmaSharp {
             return outStream;
         }
 
-        #endregion
-
-        #region Serialization Functions (Latino)
+        
+        // Serialization Functions (Latino) -------------------
         
         #if LATINO
 
@@ -398,6 +393,6 @@ namespace LemmaSharp {
 
 #endif
 
-        #endregion
+        
     }
 }
