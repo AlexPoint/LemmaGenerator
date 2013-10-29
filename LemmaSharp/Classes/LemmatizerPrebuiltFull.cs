@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace LemmaSharp.Classes
 {
-    [Serializable()]
+    [Serializable]
     public class LemmatizerPrebuiltFull : LemmatizerPrebuilt
     {
         public const string Filemask = "full7z-{0}.lem";
