@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LemmaSharp", "LemmaSharp\LemmaSharp.csproj", "{A39293C1-92D8-47B9-93A4-41F443B4F9E4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LemmaSharpPrebuiltFull", "LemmaSharpPrebuilt\LemmaSharpPrebuiltFull.csproj", "{D926B493-78B6-4FAB-A354-53869F664B5B}"
