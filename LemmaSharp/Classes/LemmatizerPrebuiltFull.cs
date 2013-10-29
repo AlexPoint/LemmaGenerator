@@ -1,23 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.IO;
-using System.Runtime.Serialization;
 using System.Reflection;
 
-namespace LemmaSharp
+namespace LemmaSharp.Classes
 {
     [Serializable()]
     public class LemmatizerPrebuiltFull : LemmatizerPrebuilt
     {
-        public const string FILEMASK = "full7z-{0}.lem";
+        public const string Filemask = "full7z-{0}.lem";
 
         // Constructor(s) & Destructor(s) ---------------------
 
-        public LemmatizerPrebuiltFull(LanguagePrebuilt lang)
-            : base(lang)
+        public LemmatizerPrebuiltFull(LanguagePrebuilt lang): base(lang)
         {
-            Stream stream = GetResourceStream(GetResourceFileName(FILEMASK));
+            Stream stream = GetResourceStream(GetResourceFileName(Filemask));
             this.Deserialize(stream);
             stream.Close();
         }

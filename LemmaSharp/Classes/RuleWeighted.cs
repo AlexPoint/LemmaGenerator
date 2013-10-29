@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace LemmaSharp {
-    [Serializable()]
+namespace LemmaSharp.Classes {
+
+    [Serializable]
     class RuleWeighted: IComparable<RuleWeighted>{
 
         // Private Variables ---------------------

@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 
-namespace LemmaSharp {
+namespace LemmaSharp.Classes {
+
     [Serializable()]
     public class LemmaTreeNode : ILemmatizerModel {
         

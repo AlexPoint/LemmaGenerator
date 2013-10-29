@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.IO;
 using System.Runtime.Serialization;
 
-namespace LemmaSharp {
+namespace LemmaSharp.Classes {
+
     /// <summary>
     /// These are the lemmagen algorithm settings that affect speed/power of the learning and lemmatizing algorithm.
     /// TODO this class will be probbably removed in the future.

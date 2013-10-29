@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Runtime.Serialization;
 
-namespace LemmaSharp {
+namespace LemmaSharp.Classes {
+
     public class RuleList : Dictionary<string, LemmaRule> {
 
         // Private Variables ------------------------
@@ -94,7 +92,7 @@ namespace LemmaSharp {
             //link the default rule just Id was saved.
             lrDefaultRule = this[binRead.ReadString()];
         }
-        public RuleList(System.IO.BinaryReader binRead, LemmatizerSettings lsett) {
+        public RuleList(BinaryReader binRead, LemmatizerSettings lsett) {
             this.Deserialize(binRead, lsett);
         }
 

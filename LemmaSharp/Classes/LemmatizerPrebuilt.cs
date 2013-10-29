@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Reflection;
 
-namespace LemmaSharp {
+namespace LemmaSharp.Classes {
 
     public enum LanguagePrebuilt {
         //from Multext-East v4 lexicons
@@ -25,8 +23,8 @@ namespace LemmaSharp {
         Serbian,
         Ukrainian,
         //from Multext lexicons
-        EnglishMT, 
-        FrenchMT, 	
+        EnglishMt, 
+        FrenchMt, 	
         German, 	
         Italian, 
         Spanish,
@@ -71,13 +69,11 @@ namespace LemmaSharp {
 
         // Constructor(s) & Destructor(s) ----------------------
 
-        public LemmatizerPrebuilt(LanguagePrebuilt lang)
-            : base() {
+        public LemmatizerPrebuilt(LanguagePrebuilt lang): base() {
             this.lang = lang;
         }
 
-        public LemmatizerPrebuilt(LanguagePrebuilt lang, LemmatizerSettings lsett)
-            : base(lsett) {
+        public LemmatizerPrebuilt(LanguagePrebuilt lang, LemmatizerSettings lsett): base(lsett) {
             this.lang = lang;
         }
 
@@ -140,8 +136,7 @@ namespace LemmaSharp {
 
         // Serialization Functions -------------------------
 
-        public LemmatizerPrebuilt(SerializationInfo info, StreamingContext context)
-            : base(info, context) {
+        public LemmatizerPrebuilt(SerializationInfo info, StreamingContext context): base(info, context) {
         }
 
         

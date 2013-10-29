@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.IO;
-using System.Runtime.Serialization;
 
+namespace LemmaSharp.Classes {
 
-namespace LemmaSharp {
     public class LemmaExample : IComparable<LemmaExample>, IComparer<LemmaExample> {
         
         // Private Variables ----------------------
@@ -43,7 +41,7 @@ namespace LemmaSharp {
                     break;
                 case LemmatizerSettings.MsdConsideration.Distinct:
                 default:
-                    sSignature = "[" + sWord + "]==>[" + sLemma + "](" + (sMsd != null ? sMsd : "") + ")";
+                    sSignature = "[" + sWord + "]==>[" + sLemma + "](" + (sMsd ?? "") + ")";
                     break;
             }
 
@@ -194,9 +192,7 @@ namespace LemmaSharp {
         /// <param name="other"> MultextExample (ME) that we compare current ME against.</param>
         /// <returns>1 if current ME is bigger, -1 if smaler and 0 if both are the same.</returns>
         public int CompareTo(LemmaExample other) {
-            int iComparison;
-
-            iComparison = CompareStrings(this.sWord, other.sWord, false);
+            int iComparison = CompareStrings(this.sWord, other.sWord, false);
             if (iComparison != 0) return iComparison;
 
             iComparison = CompareStrings(this.sLemma, other.sLemma, true);
@@ -245,7 +241,7 @@ namespace LemmaSharp {
         }
 
         public static string LongestCommonSubstring(string sStr1, string sStr2, ref int iPosInStr1, ref int iPosInStr2) {
-            int[,] l = new int[sStr1.Length + 1, sStr2.Length + 1];
+            var l = new int[sStr1.Length + 1, sStr2.Length + 1];
             int z = 0;
             string ret = "";
             iPosInStr1 = -1;

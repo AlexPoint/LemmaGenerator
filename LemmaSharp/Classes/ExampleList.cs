@@ -4,8 +4,9 @@ using System.Text;
 using System.IO;
 using System.Runtime.Serialization;
 
-namespace LemmaSharp {
-    [Serializable()]
+namespace LemmaSharp.Classes {
+
+    [Serializable]
     public class ExampleList : ISerializable {
         
         // Private Variables ----------------------------------
@@ -113,7 +114,7 @@ namespace LemmaSharp {
         }
         public LemmaExample AddExample(string sWord, string sLemma, double dWeight, string sMsd) {
             string sNewMsd = lsett.eMsdConsider != LemmatizerSettings.MsdConsideration.Ignore ? sMsd : null;
-            LemmaExample leNew = new LemmaExample(sWord, sLemma, dWeight, sNewMsd, rlRules, lsett);
+            var leNew = new LemmaExample(sWord, sLemma, dWeight, sNewMsd, rlRules, lsett);
             return Add(leNew);
         }
 
@@ -143,7 +144,7 @@ namespace LemmaSharp {
         }
 
         public ExampleList GetFrontRearExampleList(bool front) {
-            ExampleList elExamplesNew = new ExampleList(lsett);
+            var elExamplesNew = new ExampleList(lsett);
 
             foreach (LemmaExample le in this.ListExamples) {
                 if (front)
@@ -160,7 +161,7 @@ namespace LemmaSharp {
         // Output Functions (ToString) --------------------------
 
         public override string ToString() {
-            StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
 
             foreach (LemmaExample exm in lstExamples) {
                 sb.AppendLine(exm.ToString());
@@ -177,10 +178,10 @@ namespace LemmaSharp {
             info.AddValue("lsett", lsett);
             info.AddValue("iNumExamples", dictExamples.Count);
 
-            string[] aWords = new string[dictExamples.Count];
-            string[] aLemmas = new string[dictExamples.Count];
-            double[] aWeights = new double[dictExamples.Count];
-            string[] aMsds = new string[dictExamples.Count];
+            var aWords = new string[dictExamples.Count];
+            var aLemmas = new string[dictExamples.Count];
+            var aWeights = new double[dictExamples.Count];
+            var aMsds = new string[dictExamples.Count];
             int iExm = 0;
             foreach (LemmaExample exm in dictExamples.Values) {
                 aWords[iExm] = exm.Word;
@@ -203,10 +204,10 @@ namespace LemmaSharp {
             this.lstExamples = null;
             this.rlRules = new RuleList(lsett);
 
-            string[] aWords = (string[])info.GetValue("aWords", typeof(string[]));
-            string[] aLemmas = (string[])info.GetValue("aLemmas", typeof(string[]));
-            double[] aWeights = (double[])info.GetValue("aWeights", typeof(double[]));
-            string[] aMsds = (string[])info.GetValue("aMsds", typeof(string[]));
+            var aWords = (string[])info.GetValue("aWords", typeof(string[]));
+            var aLemmas = (string[])info.GetValue("aLemmas", typeof(string[]));
+            var aWeights = (double[])info.GetValue("aWeights", typeof(double[]));
+            var aMsds = (string[])info.GetValue("aMsds", typeof(string[]));
 
             for (int iExm = 0; iExm < aWords.Length; iExm++)
                 AddExample(aWords[iExm], aLemmas[iExm], aWeights[iExm], aMsds[iExm]);
@@ -277,7 +278,7 @@ namespace LemmaSharp {
             int iCount = binRead.ReadInt32();
             for (int iId = 0; iId < iCount; iId++) {
                 LemmaRule lrRule = rlRules[binRead.ReadString()];
-                LemmaExample le = new LemmaExample(binRead, this.lsett, lrRule);
+                var le = new LemmaExample(binRead, this.lsett, lrRule);
 
                 dictExamples.Add(le.Signature, le);
                 if (bCreateLstExamples) lstExamples.Add(le);
@@ -367,7 +368,6 @@ namespace LemmaSharp {
         }
 
         #endif
-
 
     }
 }

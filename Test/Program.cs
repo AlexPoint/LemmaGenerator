@@ -5,6 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using LemmaSharp;
+using LemmaSharp.Classes;
 
 namespace Test
 {
