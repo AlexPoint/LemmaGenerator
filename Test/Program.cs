@@ -15,7 +15,7 @@ namespace Test
         {
             var lemmatizer = new LemmatizerPrebuiltFull(LanguagePrebuilt.English);
 
-            var input = "Stanford University is located in California. It is a great university.";
+            const string input = "Stanford University is located in California. It is a great university.";
             var words = Regex.Split(input, @"\W+").Where(w => !string.IsNullOrEmpty(w));
 
             foreach (var word in words)
