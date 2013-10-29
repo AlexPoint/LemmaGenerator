@@ -12,6 +12,14 @@
     <AssemblyName>LemmaSharp</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <StartupObject>
+    </StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
     <PublishUrl>http://localhost/LemmaSharp/</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
@@ -24,16 +32,8 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>true</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <StartupObject>
-    </StartupObject>
-    <FileUpgradeFlags>
-    </FileUpgradeFlags>
-    <UpgradeBackupLocation>
-    </UpgradeBackupLocation>
-    <OldToolsVersion>3.5</OldToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -102,6 +102,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\LemmatizerPrebuilt.cs" />
+    <Compile Include="Classes\LemmatizerPrebuiltFull.cs" />
     <Compile Include="LatinoCompatibility\BinarySerializer.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -120,7 +122,7 @@
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
       <Visible>False</Visible>
-      <ProductName>.NET Framework Client Profile</ProductName>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
@@ -146,6 +148,66 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Data\full7z-mlteast-bg.lem" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Data\full7z-mlteast-cs.lem" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Data\full7z-mlteast-en.lem" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Data\full7z-mlteast-et.lem" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Data\full7z-mlteast-fa.lem" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Data\full7z-mlteast-fr.lem" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Data\full7z-mlteast-hu.lem" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Data\full7z-mlteast-mk.lem" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Data\full7z-mlteast-pl.lem" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Data\full7z-mlteast-ro.lem" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Data\full7z-mlteast-ru.lem" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Data\full7z-mlteast-sk.lem" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Data\full7z-mlteast-sl.lem" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Data\full7z-mlteast-sr.lem" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Data\full7z-mlteast-uk.lem" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Data\full7z-multext-en.lem" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Data\full7z-multext-fr.lem" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Data\full7z-multext-ge.lem" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Data\full7z-multext-it.lem" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Data\full7z-multext-sp.lem" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

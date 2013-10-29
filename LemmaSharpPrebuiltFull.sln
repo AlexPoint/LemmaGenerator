@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LemmaSharpPrebuiltFull", "L
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LemmaSharpPrebuilt", "LemmaSharpPrebuilt\LemmaSharpPrebuilt.csproj", "{1E700D21-62D3-4525-93FE-C1FB0A1B0564}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{C5B09C13-EA3B-4A00-B3D6-F8B790B108CA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +51,14 @@ Global
 		{1E700D21-62D3-4525-93FE-C1FB0A1B0564}.Release|x64.Build.0 = Release|x64
 		{1E700D21-62D3-4525-93FE-C1FB0A1B0564}.Release|x86.ActiveCfg = Release|x86
 		{1E700D21-62D3-4525-93FE-C1FB0A1B0564}.Release|x86.Build.0 = Release|x86
+		{C5B09C13-EA3B-4A00-B3D6-F8B790B108CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5B09C13-EA3B-4A00-B3D6-F8B790B108CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5B09C13-EA3B-4A00-B3D6-F8B790B108CA}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C5B09C13-EA3B-4A00-B3D6-F8B790B108CA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C5B09C13-EA3B-4A00-B3D6-F8B790B108CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5B09C13-EA3B-4A00-B3D6-F8B790B108CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5B09C13-EA3B-4A00-B3D6-F8B790B108CA}.Release|x64.ActiveCfg = Release|Any CPU
+		{C5B09C13-EA3B-4A00-B3D6-F8B790B108CA}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
