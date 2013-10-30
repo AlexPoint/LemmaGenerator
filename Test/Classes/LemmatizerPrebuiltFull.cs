@@ -2,7 +2,7 @@
 using System.IO;
 using System.Reflection;
 
-namespace LemmaSharp.Classes
+namespace Test.Classes
 {
     [Serializable]
     public class LemmatizerPrebuiltFull : LemmatizerPrebuilt

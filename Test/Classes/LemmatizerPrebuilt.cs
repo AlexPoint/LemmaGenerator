@@ -2,8 +2,9 @@
 using System.IO;
 using System.Runtime.Serialization;
 using System.Reflection;
+using LemmaSharp.Classes;
 
-namespace LemmaSharp.Classes {
+namespace Test.Classes {
 
     public enum LanguagePrebuilt {
         //from Multext-East v4 lexicons

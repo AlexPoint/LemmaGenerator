@@ -102,8 +102,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\LemmatizerPrebuilt.cs" />
-    <Compile Include="Classes\LemmatizerPrebuiltFull.cs" />
     <Compile Include="LatinoCompatibility\BinarySerializer.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -148,66 +146,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Data\full7z-mlteast-bg.lem" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Data\full7z-mlteast-cs.lem" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Data\full7z-mlteast-en.lem" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Data\full7z-mlteast-et.lem" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Data\full7z-mlteast-fa.lem" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Data\full7z-mlteast-fr.lem" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Data\full7z-mlteast-hu.lem" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Data\full7z-mlteast-mk.lem" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Data\full7z-mlteast-pl.lem" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Data\full7z-mlteast-ro.lem" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Data\full7z-mlteast-ru.lem" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Data\full7z-mlteast-sk.lem" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Data\full7z-mlteast-sl.lem" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Data\full7z-mlteast-sr.lem" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Data\full7z-mlteast-uk.lem" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Data\full7z-multext-en.lem" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Data\full7z-multext-fr.lem" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Data\full7z-multext-ge.lem" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Data\full7z-multext-it.lem" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Data\full7z-multext-sp.lem" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\nuget\nuget.targets" />

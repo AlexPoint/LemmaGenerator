@@ -41,11 +41,33 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\LemmatizerPrebuilt.cs" />
+    <Compile Include="Classes\LemmatizerPrebuiltFull.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <EmbeddedResource Include="Data\full7z-mlteast-bg.lem" />
+    <EmbeddedResource Include="Data\full7z-mlteast-cs.lem" />
+    <EmbeddedResource Include="Data\full7z-mlteast-en.lem" />
+    <EmbeddedResource Include="Data\full7z-mlteast-et.lem" />
+    <EmbeddedResource Include="Data\full7z-mlteast-fa.lem" />
+    <EmbeddedResource Include="Data\full7z-mlteast-fr.lem" />
+    <EmbeddedResource Include="Data\full7z-mlteast-hu.lem" />
+    <EmbeddedResource Include="Data\full7z-mlteast-mk.lem" />
+    <EmbeddedResource Include="Data\full7z-mlteast-pl.lem" />
+    <EmbeddedResource Include="Data\full7z-mlteast-ro.lem" />
+    <EmbeddedResource Include="Data\full7z-mlteast-ru.lem" />
+    <EmbeddedResource Include="Data\full7z-mlteast-sk.lem" />
+    <EmbeddedResource Include="Data\full7z-mlteast-sl.lem" />
+    <EmbeddedResource Include="Data\full7z-mlteast-sr.lem" />
+    <EmbeddedResource Include="Data\full7z-mlteast-uk.lem" />
+    <EmbeddedResource Include="Data\full7z-multext-en.lem" />
+    <EmbeddedResource Include="Data\full7z-multext-fr.lem" />
+    <EmbeddedResource Include="Data\full7z-multext-ge.lem" />
+    <EmbeddedResource Include="Data\full7z-multext-it.lem" />
+    <EmbeddedResource Include="Data\full7z-multext-sp.lem" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LemmaSharp\LemmaSharp.csproj">
