@@ -147,12 +147,6 @@
   <ItemGroup>
     <Folder Include="Properties\" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="ExternalLibs\7zipSources.7z" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="ExternalLibs\Lzma#.dll" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\nuget\nuget.targets" />
   <PropertyGroup>
