@@ -2,14 +2,14 @@
 <package >
   <metadata>
     <id>LemmaGenerator</id>
-    <version>1.0.4</version>
+    <version>1.0.5</version>
     <title>Lemmatizer generator</title>
     <authors>AlexPoint</authors>
     <owners>AlexPoint</owners>
     <projectUrl>https://github.com/AlexPoint/LemmaGenerator</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Generator of lemmatizers for several European languages</description>
-    <releaseNotes>Include source code of librairy Lzma#.dll directly in the project</releaseNotes>
+    <releaseNotes>Signed the assembly</releaseNotes>
     <copyright>Copyright 2013</copyright>
     <tags>lemmatization lemmatisation lemmatizer stemming stemmer</tags>
   </metadata>
