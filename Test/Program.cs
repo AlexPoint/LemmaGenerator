@@ -19,6 +19,8 @@ namespace Test
             // a bunch of words to lemmatize
             const string input = "Stanford University is located in California. It is a great university.";
             var words = Regex.Split(input, @"\W+").Where(w => !string.IsNullOrEmpty(w));
+            //var words = new[] {"WROTE", "TESTING"};
+            //var words = new[] {"wrote", "Wrote", "WROTE", "Written", "did", "Did", "DID", "testing", "Testing", "TESTING"};
 
             // for each word, print it's lemma
             foreach (var word in words)

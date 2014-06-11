@@ -129,8 +129,11 @@ namespace LemmaSharp.Classes {
 
         public string Lemmatize(string sWord) {
             if (!Lsett.bBuildFrontLemmatizer)
+            {
                 return LtrRootNodeSafe.Lemmatize(sWord);
-            else {
+            }
+            else
+            {
                 string sWordFront = LemmaExample.StringReverse(sWord);
                 string sLemmaFront = LtrRootNodeFrontSafe.Lemmatize(sWordFront);
                 string sWordRear = LemmaExample.StringReverse(sLemmaFront);

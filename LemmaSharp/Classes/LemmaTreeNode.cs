@@ -80,13 +80,18 @@ namespace LemmaSharp.Classes {
             if (dictSubNodes != null) {
                 List<KeyValuePair<char, LemmaTreeNode>> lReplaceNodes = new List<KeyValuePair<char, LemmaTreeNode>>();
                 foreach (KeyValuePair<char, LemmaTreeNode> kvpChild in dictSubNodes)
-                    if (kvpChild.Value.dictSubNodes != null && kvpChild.Value.dictSubNodes.Count == 1) {
+                {
+                    if (kvpChild.Value.dictSubNodes != null && kvpChild.Value.dictSubNodes.Count == 1)
+                    {
                         IEnumerator<LemmaTreeNode> enumChildChild = kvpChild.Value.dictSubNodes.Values.GetEnumerator();
                         enumChildChild.MoveNext();
                         LemmaTreeNode ltrChildChild = enumChildChild.Current;
                         if (kvpChild.Value.lrBestRule == lrBestRule)
+                        {
                             lReplaceNodes.Add(new KeyValuePair<char, LemmaTreeNode>(kvpChild.Key, ltrChildChild));
+                        }
                     }
+                }
                 foreach (KeyValuePair<char, LemmaTreeNode> kvpChild in lReplaceNodes) {
                     dictSubNodes[kvpChild.Key] = kvpChild.Value;
                     kvpChild.Value.ltnParentNode = this;
@@ -103,8 +108,12 @@ namespace LemmaSharp.Classes {
             get {
                 int iCount = 1;
                 if (dictSubNodes != null)
+                {
                     foreach (LemmaTreeNode ltnChild in dictSubNodes.Values)
+                    {
                         iCount += ltnChild.TreeSize;
+                    }
+                }
                 return iCount;
             }
         }
@@ -223,7 +232,9 @@ namespace LemmaSharp.Classes {
 
                 //TODO check out bSubGroupNeeded when there are multiple posible rules (not just lrBestRule)
                 if (elExamples[iWrd].Rule != lrBestRule)
+                {
                     bSubGroupNeeded = true;
+                }
 
                 chCharPrev = chCharThis;
             }
@@ -233,9 +244,9 @@ namespace LemmaSharp.Classes {
             LemmaTreeNode ltnSub = new LemmaTreeNode(lsett, elExamples, iStart, iEnd, this);
             
             //TODO - maybe not realy appropriate because loosing statisitcs from multiple possible rules
-            if (ltnSub.lrBestRule == lrBestRule && ltnSub.dictSubNodes == null) return;
+            if (ltnSub.lrBestRule == lrBestRule && ltnSub.dictSubNodes == null){ return;}
 
-            if (dictSubNodes == null) dictSubNodes = new Dictionary<char, LemmaTreeNode>();
+            if (dictSubNodes == null){ dictSubNodes = new Dictionary<char, LemmaTreeNode>();}
             dictSubNodes.Add(chChar, ltnSub);
         }
 
@@ -249,20 +260,27 @@ namespace LemmaSharp.Classes {
             //    return sWord.EndsWith(sCondition);
 
             int iDiff = sWord.Length - sCondition.Length;
-            if (iDiff < 0 || (bWholeWord && iDiff > 0)) return false;
+            if (iDiff < 0 || (bWholeWord && iDiff > 0)){ return false;}
 
             int iWrdEnd = sCondition.Length - ltnParentNode.sCondition.Length - 1;
             for (int iChar = 0; iChar < iWrdEnd; iChar++)
-                if (sCondition[iChar] != sWord[iChar + iDiff])
+            {
+                if (char.ToLowerInvariant(sCondition[iChar]) != char.ToLowerInvariant(sWord[iChar + iDiff]))
+                {
                     return false;
+                }
+            }
 
             return true;
         }
         public string Lemmatize(string sWord) {
             if (sWord.Length >= iSimilarity && dictSubNodes != null) {
-                char chChar = sWord.Length > iSimilarity ? sWord[sWord.Length - 1 -iSimilarity] : '\0';
+                // to lower in case the word is uppercase
+                char chChar = char.ToLower(sWord.Length > iSimilarity ? sWord[sWord.Length - 1 -iSimilarity] : '\0');
                 if (dictSubNodes.ContainsKey(chChar) && dictSubNodes[chChar].ConditionSatisfied(sWord))
+                {
                     return dictSubNodes[chChar].Lemmatize(sWord);
+                }
             }
             
             return lrBestRule.Lemmatize(sWord);
@@ -291,8 +309,12 @@ namespace LemmaSharp.Classes {
             sb.AppendLine();
 
             if (dictSubNodes != null)
+            {
                 foreach (LemmaTreeNode ltnChild in dictSubNodes.Values)
+                {
                     ltnChild.ToString(sb, iLevel + 1);
+                }
+            }
         }
         
 
@@ -326,17 +348,21 @@ namespace LemmaSharp.Classes {
         public void Deserialize(BinaryReader binRead, LemmatizerSettings lsett, ExampleList elExamples, LemmaTreeNode ltnParentNode) {
             this.lsett = lsett;
 
-            if (binRead.ReadBoolean()) {
+            if (binRead.ReadBoolean())
+            {
                 dictSubNodes = new Dictionary<char, LemmaTreeNode>();
                 int iCount = binRead.ReadInt32();
-                for (int i = 0; i < iCount; i++) {
+                for (int i = 0; i < iCount; i++)
+                {
                     char cKey = binRead.ReadChar();
                     LemmaTreeNode ltrSub = new LemmaTreeNode(binRead, this.lsett, elExamples, this);
                     dictSubNodes.Add(cKey, ltrSub);
                 }
             }
             else
+            {
                 dictSubNodes = null;
+            }
 
             this.ltnParentNode = ltnParentNode;
 
@@ -438,10 +464,14 @@ namespace LemmaSharp.Classes {
         public bool CheckConsistency() {
             bool bReturn = true;
             if (dictSubNodes != null)
+            {
                 foreach (LemmaTreeNode ltnChild in dictSubNodes.Values)
+                {
                     bReturn = bReturn &&
-                        ltnChild.CheckConsistency() &&
-                        ltnChild.sCondition.EndsWith(sCondition);
+                              ltnChild.CheckConsistency() &&
+                              ltnChild.sCondition.EndsWith(sCondition);
+                }
+            }
             return bReturn;
         }
 

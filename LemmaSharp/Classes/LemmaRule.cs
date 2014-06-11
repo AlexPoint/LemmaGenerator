@@ -64,8 +64,11 @@ namespace LemmaSharp.Classes {
         public bool IsApplicableToGroup(int iGroupCondLen) {
             return iGroupCondLen >= iFrom; 
         }
-        public string Lemmatize(string sWord) {
-            return sWord.Substring(0, sWord.Length - iFrom) + sTo;
+        public string Lemmatize(string sWord)
+        {
+            // if the removed part is upper, replace by an uppercase string
+            var isRemovedPartUpper = IsFullyUpper(sWord.Substring(sWord.Length - iFrom, iFrom));
+            return sWord.Substring(0, sWord.Length - iFrom) + (isRemovedPartUpper ? sTo.ToUpper() : sTo);
         }
         
 
@@ -170,5 +173,19 @@ namespace LemmaSharp.Classes {
 
         #endif
         
+
+        // String utilities ------
+        public static bool IsFullyUpper(string value)
+        {
+            // Consider string to be uppercase if it has no lowercase letters.
+            for (int i = 0; i < value.Length; i++)
+            {
+                if (char.IsLower(value[i]))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 }

@@ -93,10 +93,11 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>LemmaGenerator.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -193,7 +194,6 @@
   <ItemGroup>
     <None Include="Classes\7zip\Compress\LzmaAlone\bin\Debug\Lzma#.vshost.exe.manifest" />
     <None Include="Classes\7zip\Compress\LzmaAlone\LzmaAlone.suo" />
-    <None Include="LemmaGenerator.snk" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\nuget\nuget.targets" />
