@@ -44,6 +44,33 @@ namespace LemmaSharp.Classes {
             return lrRuleReturn;
         }
         
+        // Serialization Functions (regular) ------
+
+        public void Serialize(StreamWriter sWrt, bool bThisTopObject)
+        {
+            //save metadata
+            sWrt.Write(bThisTopObject); sWrt.WriteLine(Constants.Separator);
+
+            //save value types --------------------------------------
+
+            //save refernce types if needed -------------------------
+            if (bThisTopObject)
+            {
+                lsett.Serialize(sWrt);
+            }
+
+            //save list items ---------------------------------------
+            int iCount = this.Count;
+            sWrt.WriteLine(iCount);
+            foreach (KeyValuePair<string, LemmaRule> kvp in this)
+            {
+                sWrt.WriteLine(kvp.Key);
+                kvp.Value.Serialize(sWrt, false);
+            }
+
+            //default rule is already saved in the list. Here just save its id.
+            sWrt.WriteLine(lrDefaultRule.Signature);
+        }
      
         // Serialization Functions (Binary) ------
         

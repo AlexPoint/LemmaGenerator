@@ -157,6 +157,23 @@ namespace LemmaSharp.Classes {
         
         // Serialization Functions (Binary) ------------
 
+        public void Serialize(StreamWriter sWrt, bool bSerializeExamples)
+        {
+            Lsett.Serialize(sWrt);
+
+            sWrt.WriteLine(bSerializeExamples);
+            ElExamples.Serialize(sWrt, bSerializeExamples, false);
+
+            if (!bSerializeExamples)
+            {
+                ElExamples.GetFrontRearExampleList(false).Serialize(sWrt, bSerializeExamples, false);
+                ElExamples.GetFrontRearExampleList(true).Serialize(sWrt, bSerializeExamples, false);
+            }
+
+            LtnRootNode.Serialize(sWrt);
+            if (Lsett.bBuildFrontLemmatizer)
+                LtnRootNodeFront.Serialize(sWrt);
+        }
         public void Serialize(BinaryWriter binWrt, bool bSerializeExamples) {
             Lsett.Serialize(binWrt);
 
@@ -217,41 +234,68 @@ namespace LemmaSharp.Classes {
             Deserialize(streamIn);
         }
 
-        public void Serialize(Stream streamOut) {
-            Serialize(streamOut, true, Compression.None);
+        public void Serialize(Stream streamOut, bool asBinaries) {
+            Serialize(streamOut, true, Compression.None, asBinaries);
         }
-        public void Serialize(Stream streamOut, bool bSerializeExamples) {
-            Serialize(streamOut, bSerializeExamples, Compression.None);
+        public void Serialize(Stream streamOut, bool bSerializeExamples, bool asBinaries) {
+            Serialize(streamOut, bSerializeExamples, Compression.None, asBinaries);
         }
-        public void Serialize(Stream streamOut, bool bSerializeExamples, Compression compress) {
-            streamOut.WriteByte((byte)compress);
+        public void Serialize(Stream streamOut, bool bSerializeExamples, Compression compress, bool asBinaries) {
+            if (asBinaries)
+            {
+                streamOut.WriteByte((byte) compress);
+            }
+            else
+            {
+                //streamOut.Write((byte)compress);
+            }
+
             switch (compress)
-            {   case Compression.None:
-                    SerializeNone(streamOut, bSerializeExamples);
+            {
+                case Compression.None:
+                    SerializeNone(streamOut, bSerializeExamples, asBinaries);
                     break;
                 case Compression.Deflate:
-                    SerializeDeflate(streamOut, bSerializeExamples);
+                    SerializeDeflate(streamOut, bSerializeExamples, asBinaries);
                     break;
                 case Compression.Lzma:
-                    SerializeLzma(streamOut, bSerializeExamples);
+                    SerializeLzma(streamOut, bSerializeExamples, asBinaries);
                     break;
                 default:
                     break;
             }
         }
 
-        private void SerializeNone(Stream streamOut, bool bSerializeExamples) {
-            var binWrt = new BinaryWriter(streamOut);
-            this.Serialize(binWrt, bSerializeExamples);
+        private void SerializeNone(Stream streamOut, bool bSerializeExamples, bool asBinaries) {
+            if (asBinaries)
+            {
+                var binWrt = new BinaryWriter(streamOut);
+                this.Serialize(binWrt, bSerializeExamples);
+            }
+            else
+            {
+                var sWrt = new StreamWriter(streamOut);
+                this.Serialize(sWrt, bSerializeExamples);
+            }
         }
-        private void SerializeDeflate(Stream streamOut, bool bSerializeExamples) {
+        private void SerializeDeflate(Stream streamOut, bool bSerializeExamples, bool asBinaries) {
             Stream streamOutNew = new DeflateStream(streamOut, CompressionMode.Compress, true);
-            var binWrt = new BinaryWriter(streamOutNew);
-            this.Serialize(binWrt, bSerializeExamples);
-            binWrt.Flush();
-            binWrt.Close();
+            if (asBinaries)
+            {
+                var binWrt = new BinaryWriter(streamOutNew);
+                this.Serialize(binWrt, bSerializeExamples);
+                binWrt.Flush();
+                binWrt.Close();
+            }
+            else
+            {
+                var sWrt = new StreamWriter(streamOutNew);
+                this.Serialize(sWrt, bSerializeExamples);
+                sWrt.Flush();
+                sWrt.Close();
+            }
         }
-        private void SerializeLzma(Stream streamOut, bool bSerializeExamples) {
+        private void SerializeLzma(Stream streamOut, bool bSerializeExamples, bool asBinaries) {
             CoderPropID[] propIDs = 
 				{
 					CoderPropID.DictionarySize,
@@ -288,19 +332,38 @@ namespace LemmaSharp.Classes {
 				};
 
             var msTemp = new MemoryStream();
-            var binWrtTemp = new BinaryWriter(msTemp);
-            this.Serialize(binWrtTemp, bSerializeExamples);
-            msTemp.Position = 0;
+            if (asBinaries)
+            {
+                var binWrtTemp = new BinaryWriter(msTemp);
+                this.Serialize(binWrtTemp, bSerializeExamples);
+                msTemp.Position = 0;
 
-            var encoder = new SevenZip.Compression.LZMA.Encoder();
-            encoder.SetCoderProperties(propIDs, properties);
-            encoder.WriteCoderProperties(streamOut);
-            Int64 fileSize = msTemp.Length;
-            for (int i = 0; i < 8; i++)
-                streamOut.WriteByte((Byte)(fileSize >> (8 * i)));
-            encoder.Code(msTemp, streamOut, -1, -1, null);
-            binWrtTemp.Close();
-            msTemp.Close();
+                var encoder = new SevenZip.Compression.LZMA.Encoder();
+                encoder.SetCoderProperties(propIDs, properties);
+                encoder.WriteCoderProperties(streamOut);
+                Int64 fileSize = msTemp.Length;
+                for (int i = 0; i < 8; i++)
+                    streamOut.WriteByte((Byte) (fileSize >> (8*i)));
+                encoder.Code(msTemp, streamOut, -1, -1, null);
+                binWrtTemp.Close();
+                msTemp.Close();
+            }
+            else
+            {
+                var sWrtTemp = new StreamWriter(msTemp);
+                this.Serialize(sWrtTemp, bSerializeExamples);
+                msTemp.Position = 0;
+
+                var encoder = new SevenZip.Compression.LZMA.Encoder();
+                encoder.SetCoderProperties(propIDs, properties);
+                encoder.WriteCoderProperties(streamOut);
+                Int64 fileSize = msTemp.Length;
+                for (int i = 0; i < 8; i++)
+                    streamOut.WriteByte((Byte)(fileSize >> (8 * i)));
+                encoder.Code(msTemp, streamOut, -1, -1, null);
+                sWrtTemp.Close();
+                msTemp.Close();
+            }
         }
 
         public void Deserialize(Stream streamIn) {

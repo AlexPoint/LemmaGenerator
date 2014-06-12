@@ -92,6 +92,17 @@ namespace LemmaSharp.Classes {
             bBuildFrontLemmatizer = info.GetBoolean("bBuildFrontLemmatizer");
         }
 
+        // Serialization Functions (regular) ----------------
+
+        public void Serialize(StreamWriter sWrt)
+        {
+            sWrt.Write(bUseFromInRules); sWrt.Write(Constants.Separator);
+            sWrt.Write((int)eMsdConsider); sWrt.Write(Constants.Separator);
+            sWrt.Write(iMaxRulesPerNode); sWrt.Write(Constants.Separator);
+            sWrt.Write(bBuildFrontLemmatizer); sWrt.Write(Constants.Separator);
+            sWrt.WriteLine();
+        }
+
         
         // Serialization Functions (Binary) -----------------
 

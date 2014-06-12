@@ -125,6 +125,7 @@
     <Compile Include="Classes\7zip\Compress\RangeCoder\RangeCoderBit.cs" />
     <Compile Include="Classes\7zip\Compress\RangeCoder\RangeCoderBitTree.cs" />
     <Compile Include="Classes\7zip\ICoder.cs" />
+    <Compile Include="Classes\Constants.cs" />
     <Compile Include="LatinoCompatibility\BinarySerializer.cs">
       <SubType>Code</SubType>
     </Compile>

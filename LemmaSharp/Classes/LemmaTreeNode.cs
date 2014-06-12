@@ -318,6 +318,37 @@ namespace LemmaSharp.Classes {
         }
         
 
+        // Serialization functions (regular) --------
+        public void Serialize(StreamWriter sWrt)
+        {
+            sWrt.Write(dictSubNodes != null);
+            if (dictSubNodes != null)
+            {
+                sWrt.Write(dictSubNodes.Count);
+                foreach (KeyValuePair<char, LemmaTreeNode> kvp in dictSubNodes)
+                {
+                    sWrt.Write(kvp.Key);
+                    kvp.Value.Serialize(sWrt);
+                }
+            }
+
+            sWrt.Write(iSimilarity);
+            sWrt.Write(sCondition);
+            sWrt.Write(bWholeWord);
+
+            sWrt.Write(lrBestRule.Signature);
+            sWrt.Write(aBestRules.Length);
+            for (int i = 0; i < aBestRules.Length; i++)
+            {
+                sWrt.Write(aBestRules[i].Rule.Signature);
+                sWrt.Write(aBestRules[i].Weight);
+            }
+            sWrt.Write(dWeight);
+
+            sWrt.Write(iStart);
+            sWrt.Write(iEnd);
+        }
+
         // Serialization Functions (Binary) ---------
 
         public void Serialize(BinaryWriter binWrt) {

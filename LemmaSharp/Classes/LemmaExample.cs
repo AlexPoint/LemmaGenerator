@@ -290,6 +290,38 @@ namespace LemmaSharp.Classes {
             return String.IsNullOrEmpty(sThis) ? "" : sThis.Substring(0, sThis.Length - 1);
         }
 
+        // Serialization functions (regular) ------------
+
+        public void Serialize(StreamWriter sWrt, bool bThisTopObject)
+        {
+            //save metadata
+            sWrt.Write(bThisTopObject); sWrt.Write(Constants.Separator);
+
+            //save value types --------------------------------------
+            sWrt.Write(sWord); sWrt.Write(Constants.Separator);
+            sWrt.Write(sLemma); sWrt.Write(Constants.Separator);
+            sWrt.Write(sSignature); sWrt.Write(Constants.Separator);
+            if (sMsd == null)
+            {
+                sWrt.Write(false);
+                sWrt.Write(Constants.Separator);
+            }
+            else
+            {
+                sWrt.Write(true); sWrt.Write(Constants.Separator);
+                sWrt.Write(sMsd); sWrt.Write(Constants.Separator);
+            }
+            sWrt.Write(dWeight); sWrt.Write(Constants.Separator);
+
+            //save refernce types if needed -------------------------
+            if (bThisTopObject)
+            {
+                lsett.Serialize(sWrt);
+                lrRule.Serialize(sWrt, false);
+            }
+
+            sWrt.WriteLine();
+        }
 
         // Serialization Functions (Binary) --------------
 

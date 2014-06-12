@@ -78,6 +78,35 @@ namespace LemmaSharp.Classes {
             return iId + ":" + sSignature;
         }
         
+        // Serialization Functions (regular) -----
+
+        public void Serialize(StreamWriter sWrt, bool bThisTopObject)
+        {
+            //save metadata
+            sWrt.Write(bThisTopObject); sWrt.Write(Constants.Separator);
+
+            //save value types --------------------------------------
+            sWrt.Write(iId); sWrt.Write(Constants.Separator);
+            sWrt.Write(iFrom); sWrt.Write(Constants.Separator);
+            if (sFrom == null)
+            {
+                sWrt.Write(false); sWrt.Write(Constants.Separator);
+            }
+            else
+            {
+                sWrt.Write(true); sWrt.Write(Constants.Separator);
+                sWrt.Write(sFrom); sWrt.Write(Constants.Separator);
+            }
+            sWrt.Write(sTo); sWrt.Write(Constants.Separator);
+            sWrt.Write(sSignature); sWrt.Write(Constants.Separator);
+
+            if (bThisTopObject)
+            {
+                lsett.Serialize(sWrt); sWrt.Write(Constants.Separator);
+            }
+
+            sWrt.WriteLine();
+        }
 
         // Serialization Functions (Binary) -----
 
@@ -88,9 +117,12 @@ namespace LemmaSharp.Classes {
             //save value types --------------------------------------
             binWrt.Write(iId);
             binWrt.Write(iFrom);
-            if (sFrom == null) 
+            if (sFrom == null)
+            {
                 binWrt.Write(false);
-            else {
+            }
+            else
+            {
                 binWrt.Write(true);
                 binWrt.Write(sFrom);
             }

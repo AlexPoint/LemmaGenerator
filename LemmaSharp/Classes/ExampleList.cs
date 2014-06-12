@@ -213,6 +213,64 @@ namespace LemmaSharp.Classes {
                 AddExample(aWords[iExm], aLemmas[iExm], aWeights[iExm], aMsds[iExm]);
         }
 
+        // Serialization functions (regular) ----------------------
+
+        public void Serialize(StreamWriter sWrt, bool bSerializeExamples, bool bThisTopObject)
+        {
+            //save metadata
+            sWrt.Write(bThisTopObject); sWrt.Write(Constants.Separator);
+
+            //save refernce types if needed -------------------------
+            if (bThisTopObject)
+            {
+                lsett.Serialize(sWrt); sWrt.Write(Constants.Separator);
+            }
+
+            rlRules.Serialize(sWrt, false);
+
+            if (!bSerializeExamples)
+            {
+                sWrt.Write(false); // lstExamples == null
+                sWrt.Write(Constants.Separator);
+                sWrt.Write(0); // dictExamples.Count == 0
+                sWrt.Write(Constants.Separator);
+            }
+            else
+            {
+                if (lstExamples == null)
+                {
+                    sWrt.Write(false); // lstExamples == null
+                    sWrt.Write(Constants.Separator);
+
+                    //save dictionary items
+                    int iCount = dictExamples.Count;
+                    sWrt.Write(iCount); sWrt.Write(Constants.Separator);
+
+                    foreach (KeyValuePair<string, LemmaExample> kvp in dictExamples)
+                    {
+                        sWrt.Write(kvp.Value.Rule.Signature); sWrt.Write(Constants.Separator);
+                        kvp.Value.Serialize(sWrt, false);
+                    }
+                }
+                else
+                {
+                    sWrt.Write(true); // lstExamples != null
+                    sWrt.Write(Constants.Separator);
+
+                    //save list & dictionary items
+                    int iCount = lstExamples.Count;
+                    sWrt.Write(iCount); sWrt.Write(Constants.Separator);
+
+                    foreach (LemmaExample le in lstExamples)
+                    {
+                        sWrt.Write(le.Rule.Signature); sWrt.Write(Constants.Separator);
+                        le.Serialize(sWrt, false);
+                    }
+                }
+            }
+            sWrt.WriteLine();
+        }
+
         
         // Serialization Functions (Binary) -----------------------
 
