@@ -18,9 +18,9 @@ namespace Test
         {
             var lemmatizer = CreateLemmatizerFromFile();
 
-            /*// a bunch of words to lemmatize
+            // a bunch of words to lemmatize
             /*const string input = "Stanford University is located in California. It is a great university.";
-            var words = Regex.Split(input, @"\W+").Where(w => !string.IsNullOrEmpty(w));#1#
+            var words = Regex.Split(input, @"\W+").Where(w => !string.IsNullOrEmpty(w));*/
             var words = new[] { "going", "working", "finding", "got", "found", "heard", 
                 "told", "said", "thought", "met", "saw", "left", "took", 
                 "was", "were", "lost", "felt", "fell", "brought", "spoke", 
@@ -32,16 +32,26 @@ namespace Test
             {
                 var lemma = lemmatizer.Lemmatize(word);
                 Console.WriteLine(word + " --> " + lemma);
-            }*/
+            }
 
-            var currentDirectory = Directory.GetCurrentDirectory();
+            // Create readable file
+            /*var currentDirectory = Directory.GetCurrentDirectory();
             var dataFilePath = string.Format("{0}/{1}/{2}", currentDirectory, "../../Data/Uncompressed", "full7z-multext-en.lem");
 
             using (var fstream = File.Create(dataFilePath))
             {
                 lemmatizer.Serialize(fstream, false);
             }
-            
+            */
+
+            // add examples
+
+            Console.WriteLine("Add word 'making' to examples");
+            lemmatizer.AddExample("making", "make");
+
+            var lem = lemmatizer.Lemmatize("making");
+            Console.WriteLine("making --> " + lem);
+
             Console.WriteLine("OK");
             Console.ReadLine();
         }

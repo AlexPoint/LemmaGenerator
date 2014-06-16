@@ -121,13 +121,15 @@ namespace LemmaSharp.Classes {
         private LemmaExample Add(LemmaExample leNew) {
             LemmaExample leReturn = null;
 
-            if (!dictExamples.TryGetValue(leNew.Signature, out leReturn)) {
+            if (!dictExamples.TryGetValue(leNew.Signature, out leReturn))
+            {
                 leReturn = leNew;
                 dictExamples.Add(leReturn.Signature, leReturn);
             }
             else
+            {
                 leReturn.Join(leNew);
-
+            }
 
             lstExamples = null;
 

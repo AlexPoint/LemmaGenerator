@@ -185,7 +185,7 @@ namespace LemmaSharp.Classes {
                 ElExamples.GetFrontRearExampleList(true).Serialize(binWrt, bSerializeExamples, false);
             }
 
-            LtnRootNode.Serialize(binWrt);
+            //LtnRootNode.Serialize(binWrt);
             if (Lsett.bBuildFrontLemmatizer)
                 LtnRootNodeFront.Serialize(binWrt);
         }
