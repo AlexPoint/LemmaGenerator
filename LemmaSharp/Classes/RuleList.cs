@@ -102,17 +102,14 @@ namespace LemmaSharp.Classes {
             //load value types --------------------------------------
 
             //load refernce types if needed -------------------------
-            if (bThisTopObject)
-                this.lsett = new LemmatizerSettings(binRead);
-            else
-                this.lsett = lsett;
+            this.lsett = bThisTopObject ? new LemmatizerSettings(binRead) : lsett;
                
             //load list items ---------------------------------------
             this.Clear();
             int iCount = binRead.ReadInt32();
             for (int iId = 0; iId < iCount; iId++) {
                 string sKey = binRead.ReadString();
-                LemmaRule lrVal = new LemmaRule(binRead, this.lsett);
+                var lrVal = new LemmaRule(binRead, this.lsett);
                 this.Add(sKey, lrVal);
             }
 

@@ -158,7 +158,7 @@ namespace LemmaSharp.Classes {
             dWeight = 0;
 
             //calculate dWeight of whole node and calculates qualities for all rules
-            Dictionary<LemmaRule, double> dictApplicableRules = new Dictionary<LemmaRule,double>();
+            var dictApplicableRules = new Dictionary<LemmaRule,double>();
             //dictApplicableRules.Add(elExamples.Rules.DefaultRule, 0);
             while (dictApplicableRules.Count == 0) {
                 for (int iExm = iStart; iExm <= iEnd; iExm++) {
@@ -241,7 +241,7 @@ namespace LemmaSharp.Classes {
             if (bSubGroupNeeded && iStartGroup != iStart) AddSub(iStartGroup, iEnd, chCharPrev);
         }
         private void AddSub(int iStart, int iEnd, char chChar) {
-            LemmaTreeNode ltnSub = new LemmaTreeNode(lsett, elExamples, iStart, iEnd, this);
+            var ltnSub = new LemmaTreeNode(lsett, elExamples, iStart, iEnd, this);
             
             //TODO - maybe not realy appropriate because loosing statisitcs from multiple possible rules
             if (ltnSub.lrBestRule == lrBestRule && ltnSub.dictSubNodes == null){ return;}
@@ -290,7 +290,7 @@ namespace LemmaSharp.Classes {
         // Output Functions (ToString) ---------------
 
         public override string ToString() {
-            StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
             ToString(sb, 0);
             return sb.ToString();
         }
@@ -299,12 +299,16 @@ namespace LemmaSharp.Classes {
             sb.Append("Suffix=\"" + (bWholeWord?"^":"") + sCondition + "\"; ");
             sb.Append("Rule=\"" + lrBestRule.ToString() + "\"; ");
             sb.Append("Weight=" + dWeight + "\"; ");
-            if (aBestRules != null && aBestRules.Length>0) sb.Append("Cover=" + aBestRules[0].Weight + "; ");
+            if (aBestRules != null && aBestRules.Length>0){ sb.Append("Cover=" + aBestRules[0].Weight + "; ");}
             sb.Append("Rulles=");
             if (aBestRules != null)
+            {
                 foreach (RuleWeighted rw in aBestRules)
+                {
                     sb.Append(" " + rw.ToString());
-            sb.Append("; ");
+                }
+                sb.Append("; ");
+            }
 
             sb.AppendLine();
 
@@ -386,7 +390,7 @@ namespace LemmaSharp.Classes {
                 for (int i = 0; i < iCount; i++)
                 {
                     char cKey = binRead.ReadChar();
-                    LemmaTreeNode ltrSub = new LemmaTreeNode(binRead, this.lsett, elExamples, this);
+                    var ltrSub = new LemmaTreeNode(binRead, this.lsett, elExamples, this);
                     dictSubNodes.Add(cKey, ltrSub);
                 }
             }
@@ -406,7 +410,9 @@ namespace LemmaSharp.Classes {
             int iCountBest = binRead.ReadInt32();
             aBestRules = new RuleWeighted[iCountBest];
             for (int i = 0; i < iCountBest; i++)
+            {
                 aBestRules[i] = new RuleWeighted(elExamples.Rules[binRead.ReadString()], binRead.ReadDouble());
+            }
 
             dWeight = binRead.ReadDouble();
 

@@ -114,7 +114,7 @@ namespace LemmaSharp.Classes {
         // Essential Class Functions (building model & lemmatizing) ----------
 
         public void BuildModel() {
-            if (LtnRootNode != null) return;
+            if (LtnRootNode != null){ return;}
 
             if (!Lsett.bBuildFrontLemmatizer) {
                 //TODO remove: elExamples.FinalizeAdditions();
@@ -172,7 +172,9 @@ namespace LemmaSharp.Classes {
 
             LtnRootNode.Serialize(sWrt);
             if (Lsett.bBuildFrontLemmatizer)
+            {
                 LtnRootNodeFront.Serialize(sWrt);
+            }
         }
         public void Serialize(BinaryWriter binWrt, bool bSerializeExamples) {
             Lsett.Serialize(binWrt);
@@ -187,7 +189,9 @@ namespace LemmaSharp.Classes {
 
             //LtnRootNode.Serialize(binWrt);
             if (Lsett.bBuildFrontLemmatizer)
+            {
                 LtnRootNodeFront.Serialize(binWrt);
+            }
         }
         public void Deserialize(BinaryReader binRead) {
             Lsett = new LemmatizerSettings(binRead);

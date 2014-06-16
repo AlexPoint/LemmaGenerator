@@ -37,12 +37,13 @@ namespace Test.Classes {
         Multext
     }
 
-    [Serializable()]
+    [Serializable]
     public abstract class LemmatizerPrebuilt : Lemmatizer {
 
         // Private Variables --------------------------------
 
-        private static string[] asLangMapping = new string[] {
+        private static readonly string[] AsLangMapping =
+        {
             "bg", "mlteast",
             "cs", "mlteast",
             "en", "mlteast",
@@ -65,12 +66,13 @@ namespace Test.Classes {
             "sp", "multext",
         };
 
-        private LanguagePrebuilt lang;
+        private readonly LanguagePrebuilt lang;
         
 
         // Constructor(s) & Destructor(s) ----------------------
 
-        public LemmatizerPrebuilt(LanguagePrebuilt lang): base() {
+        public LemmatizerPrebuilt(LanguagePrebuilt lang)
+        {
             this.lang = lang;
         }
 
@@ -86,7 +88,7 @@ namespace Test.Classes {
         }
 
         public static string GetResourceFileName(string sFileMask, LanguagePrebuilt lang) {
-            string langFileName = asLangMapping[(int)lang * 2 + 1] + '-' +asLangMapping[(int)lang * 2];
+            string langFileName = AsLangMapping[(int)lang * 2 + 1] + '-' +AsLangMapping[(int)lang * 2];
             return String.Format(sFileMask, langFileName);
         }
         
@@ -111,7 +113,7 @@ namespace Test.Classes {
 
         public static LexiconPrebuilt GetLexicon(LanguagePrebuilt lang)
         {
-            return (LexiconPrebuilt)Enum.Parse(typeof(LexiconPrebuilt), asLangMapping[((int)lang) * 2 + 1], true);
+            return (LexiconPrebuilt)Enum.Parse(typeof(LexiconPrebuilt), AsLangMapping[((int)lang) * 2 + 1], true);
         }
 
         

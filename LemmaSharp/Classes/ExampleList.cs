@@ -101,16 +101,18 @@ namespace LemmaSharp.Classes {
 
                 string sWord = asWords[iW];
                 string sLemma = asWords[iL];
-                if (sLemma == "=") sLemma = sWord;
+                if (sLemma == "="){ sLemma = sWord;}
                 string sMsd = null;
-                if (iM > -1) sMsd = asWords[iM];
+                if (iM > -1){ sMsd = asWords[iM];}
                 double dWeight = 1; ;
                 if (iF > -1)
+                {
                     Double.TryParse(asWords[iM], out dWeight);
+                }
 
                 AddExample(sWord, sLemma, dWeight, sMsd);
             }
-            if (iError == 50) Console.WriteLine("  Parsing stopped because of too many (50) errors. Check format specification");
+            if (iError == 50){ Console.WriteLine("  Parsing stopped because of too many (50) errors. Check format specification");}
         }
         public LemmaExample AddExample(string sWord, string sLemma, double dWeight, string sMsd) {
             string sNewMsd = lsett.eMsdConsider != LemmatizerSettings.MsdConsideration.Ignore ? sMsd : null;
@@ -150,9 +152,13 @@ namespace LemmaSharp.Classes {
 
             foreach (LemmaExample le in this.ListExamples) {
                 if (front)
+                {
                     elExamplesNew.AddExample(le.WordFront, le.LemmaFront, le.Weight, le.Msd);
+                }
                 else
+                {
                     elExamplesNew.AddExample(le.WordRear, le.LemmaRear, le.Weight, le.Msd);
+                }
             }
             elExamplesNew.FinalizeAdditions();
 
@@ -212,7 +218,9 @@ namespace LemmaSharp.Classes {
             var aMsds = (string[])info.GetValue("aMsds", typeof(string[]));
 
             for (int iExm = 0; iExm < aWords.Length; iExm++)
+            {
                 AddExample(aWords[iExm], aLemmas[iExm], aWeights[iExm], aMsds[iExm]);
+            }
         }
 
         // Serialization functions (regular) ----------------------
@@ -282,7 +290,9 @@ namespace LemmaSharp.Classes {
             
             //save refernce types if needed -------------------------
             if (bThisTopObject)
+            {
                 lsett.Serialize(binWrt);
+            }
 
             rlRules.Serialize(binWrt, false);
 
@@ -323,9 +333,13 @@ namespace LemmaSharp.Classes {
             
             //load refernce types if needed -------------------------
             if (bThisTopObject)
+            {
                 this.lsett = new LemmatizerSettings(binRead);
+            }
             else
+            {
                 this.lsett = lsett;
+            }
 
             rlRules = new RuleList(binRead, this.lsett);
 
@@ -341,7 +355,7 @@ namespace LemmaSharp.Classes {
                 var le = new LemmaExample(binRead, this.lsett, lrRule);
 
                 dictExamples.Add(le.Signature, le);
-                if (bCreateLstExamples) lstExamples.Add(le);
+                if (bCreateLstExamples){ lstExamples.Add(le);}
             }
         }
         public ExampleList(BinaryReader binRead, LemmatizerSettings lsett) {

@@ -27,7 +27,7 @@ namespace SourceFileBuilder
             return results;
         }
 
-
+        // List of irregular verbs retrieved on http://www.englishpage.com/irregularverbs/irregularverbs.html
         private static readonly List<IrregularVerb> AllIrregularVerbs = new List<IrregularVerb>()
         {
             new IrregularVerb()

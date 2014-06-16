@@ -91,7 +91,9 @@ namespace LemmaSharp.Classes {
         public string WordFront {
             get {
                 if (sWordFrontCache == null)
+                {
                     sWordFrontCache = StringReverse(sWord);
+                }
                 return sWordFrontCache;
             }
         }
@@ -101,7 +103,9 @@ namespace LemmaSharp.Classes {
         public string LemmaFront {
             get {
                 if (sLemmaFrontCache == null)
+                {
                     sLemmaFrontCache = StringReverse(WordRear);
+                }
                 return sLemmaFrontCache;
             }
         }
@@ -174,7 +178,12 @@ namespace LemmaSharp.Classes {
             int iMaxLen = Math.Min(iLen1, iLen2);
 
             for (int iPos = 1; iPos <= iMaxLen; iPos++)
-                if (sWord1[iLen1 - iPos] != sWord2[iLen2 - iPos]) return iPos - 1;
+            {
+                if (sWord1[iLen1 - iPos] != sWord2[iLen2 - iPos])
+                {
+                    return iPos - 1;
+                }
+            }
 
             //TODO similarity should be bigger if two words are totaly equal
             //if (sWord1 == sWord2)
