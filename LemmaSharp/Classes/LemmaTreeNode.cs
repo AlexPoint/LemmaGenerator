@@ -276,7 +276,7 @@ namespace LemmaSharp.Classes {
         public string Lemmatize(string sWord) {
             if (sWord.Length >= iSimilarity && dictSubNodes != null) {
                 // to lower in case the word is uppercase
-                char chChar = char.ToLower(sWord.Length > iSimilarity ? sWord[sWord.Length - 1 -iSimilarity] : '\0');
+                char chChar = char.ToLower(sWord.Length > iSimilarity ? sWord[sWord.Length - 1 - iSimilarity] : '\0');
                 if (dictSubNodes.ContainsKey(chChar) && dictSubNodes[chChar].ConditionSatisfied(sWord))
                 {
                     return dictSubNodes[chChar].Lemmatize(sWord);

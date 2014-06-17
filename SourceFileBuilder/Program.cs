@@ -41,7 +41,19 @@ namespace SourceFileBuilder
             // add new words and lemma
             foreach (var wordAndLemma in wordsAndLemmaToAdd)
             {
-                lemmatizer.AddExample(wordAndLemma.Item1, wordAndLemma.Item2);
+                lemmatizer.AddExample(wordAndLemma.Item1, wordAndLemma.Item2, 100);
+            }
+            
+            var words = new[] { "going", "working", "finding", "got", "found", "heard", 
+                "told", "said", "thought", "met", "saw", "left", "took", 
+                "was", "were", "lost", "felt", "fell", "brought", "spoke", 
+                "making", "thinking", "meeting", "running", "staring", "seeing",
+                // other examples to check
+                "net", "nets", "belt", "smell"};
+            foreach (var word in words)
+            {
+                var lemma = lemmatizer.Lemmatize(word);
+                Console.WriteLine(word + " --> " + lemma);
             }
 
             // write output file

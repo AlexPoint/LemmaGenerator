@@ -20,6 +20,8 @@ namespace LemmaSharp.Classes {
 
         /// <summary>
         /// How algorithm considers msd tags.
+        /// MSD stands for the wordform morphosyntactic description. 
+        /// This is the set of all lemmas starting with "writ-", as they appear in the Multext English lexicon
         /// </summary>
         public enum MsdConsideration {
             /// <summary>
