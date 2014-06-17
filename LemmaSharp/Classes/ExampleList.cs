@@ -35,24 +35,26 @@ namespace LemmaSharp.Classes {
 
         public LemmaExample this[int i] {
             get {
-                if (lstExamples == null) FinalizeAdditions();
+                if (lstExamples == null){ FinalizeAdditions();}
                 return lstExamples[i];
             }
         }
         public int Count {
             get {
-                if (lstExamples == null) FinalizeAdditions();
+                if (lstExamples == null){ FinalizeAdditions();}
                 return lstExamples.Count;
             }
         }
         public double WeightSum {
             get {
-                if (lstExamples == null) FinalizeAdditions();
+                if (lstExamples == null){ FinalizeAdditions();}
 
                 double dWeight = 0;
 
                 foreach (LemmaExample exm in lstExamples)
+                {
                     dWeight += exm.Weight;
+                }
 
                 return dWeight;
             }
@@ -64,7 +66,7 @@ namespace LemmaSharp.Classes {
         }
         public List<LemmaExample> ListExamples {
             get {
-                if (lstExamples == null) FinalizeAdditions();
+                if (lstExamples == null){ FinalizeAdditions();}
                 return lstExamples;
             }
         }
@@ -142,7 +144,7 @@ namespace LemmaSharp.Classes {
             lstExamples = null;
         }
         public void FinalizeAdditions() {
-            if (lstExamples != null) return;
+            if (lstExamples != null){ return;}
             lstExamples = new List<LemmaExample>(dictExamples.Values);
             lstExamples.Sort();
         }
@@ -284,7 +286,7 @@ namespace LemmaSharp.Classes {
         
         // Serialization Functions (Binary) -----------------------
 
-        public void Serialize(BinaryWriter binWrt, bool bSerializeExamples, bool bThisTopObject) {
+        public void Serialize(BinaryWriter binWrt, bool bSerializeExamples, bool bThisTopObject){
             //save metadata
             binWrt.Write(bThisTopObject);
             
@@ -294,6 +296,7 @@ namespace LemmaSharp.Classes {
                 lsett.Serialize(binWrt);
             }
 
+            //
             rlRules.Serialize(binWrt, false);
 
             if (!bSerializeExamples) {
@@ -327,6 +330,7 @@ namespace LemmaSharp.Classes {
                 }
             }
         }
+
         public void Deserialize(BinaryReader binRead, LemmatizerSettings lsett) {
             //load metadata
             bool bThisTopObject = binRead.ReadBoolean();

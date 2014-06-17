@@ -130,7 +130,9 @@ namespace LemmaSharp.Classes {
             binWrt.Write(sSignature);
 
             if (bThisTopObject)
+            {
                 lsett.Serialize(binWrt);
+            }
         }
         public void Deserialize(BinaryReader binRead, LemmatizerSettings lsett) {
             //load metadata
@@ -140,19 +142,27 @@ namespace LemmaSharp.Classes {
             iId = binRead.ReadInt32();
             iFrom = binRead.ReadInt32();
             if (binRead.ReadBoolean())
+            {
                 sFrom = binRead.ReadString();
+            }
             else
+            {
                 sFrom = null;
+            }
             sTo = binRead.ReadString();
             sSignature = binRead.ReadString();
 
             //load refernce types if needed -------------------------
             if (bThisTopObject)
+            {
                 this.lsett = new LemmatizerSettings(binRead);
+            }
             else
+            {
                 this.lsett = lsett;
+            }
         }
-        public LemmaRule(System.IO.BinaryReader binRead, LemmatizerSettings lsett) {
+        public LemmaRule(BinaryReader binRead, LemmatizerSettings lsett) {
             this.Deserialize(binRead, lsett);
         }
         

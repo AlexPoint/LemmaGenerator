@@ -23,7 +23,7 @@ namespace LemmaSharp.Classes {
         /// </summary>
         public enum MsdConsideration {
             /// <summary>
-            /// Completely ignores mds tags (join examples with different tags and sum their weihgts).
+            /// Completely ignores msd tags (join examples with different tags and sum their weihgts).
             /// </summary>
             Ignore,
             /// <summary>
@@ -118,7 +118,7 @@ namespace LemmaSharp.Classes {
             iMaxRulesPerNode = binRead.ReadInt32();
             bBuildFrontLemmatizer = binRead.ReadBoolean();
         }
-        public LemmatizerSettings(System.IO.BinaryReader binRead) {
+        public LemmatizerSettings(BinaryReader binRead) {
             this.Deserialize(binRead);
         }
 

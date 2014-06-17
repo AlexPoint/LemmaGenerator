@@ -356,8 +356,10 @@ namespace LemmaSharp.Classes {
         // Serialization Functions (Binary) ---------
 
         public void Serialize(BinaryWriter binWrt) {
+            // is not null?
             binWrt.Write(dictSubNodes != null);
             if (dictSubNodes != null) {
+                // write all dictionary (key+value)
                 binWrt.Write(dictSubNodes.Count);
                 foreach (KeyValuePair<char, LemmaTreeNode> kvp in dictSubNodes) {
                     binWrt.Write(kvp.Key);
@@ -365,26 +367,32 @@ namespace LemmaSharp.Classes {
                 }
             }
 
+            // similarity, condition and wholeword?
             binWrt.Write(iSimilarity);
             binWrt.Write(sCondition);
             binWrt.Write(bWholeWord);
 
+            // best rule signarute
             binWrt.Write(lrBestRule.Signature);
+            // best rules
             binWrt.Write(aBestRules.Length);
             for (int i = 0; i < aBestRules.Length; i++) {
                 binWrt.Write(aBestRules[i].Rule.Signature);
                 binWrt.Write(aBestRules[i].Weight);
             }
-            binWrt.Write(dWeight);
 
+            // weight, start, end
+            binWrt.Write(dWeight);
             binWrt.Write(iStart);
             binWrt.Write(iEnd);
         }
         public void Deserialize(BinaryReader binRead, LemmatizerSettings lsett, ExampleList elExamples, LemmaTreeNode ltnParentNode) {
             this.lsett = lsett;
 
+            // read is not null?
             if (binRead.ReadBoolean())
             {
+                // read all dictionary (key + value)
                 dictSubNodes = new Dictionary<char, LemmaTreeNode>();
                 int iCount = binRead.ReadInt32();
                 for (int i = 0; i < iCount; i++)
@@ -401,12 +409,15 @@ namespace LemmaSharp.Classes {
 
             this.ltnParentNode = ltnParentNode;
 
+            // read similarity, condition and wholeword?
             iSimilarity = binRead.ReadInt32();
             sCondition = binRead.ReadString();
             bWholeWord = binRead.ReadBoolean();
 
+            // best rule signature
             lrBestRule = elExamples.Rules[binRead.ReadString()];
 
+            // best rules
             int iCountBest = binRead.ReadInt32();
             aBestRules = new RuleWeighted[iCountBest];
             for (int i = 0; i < iCountBest; i++)
@@ -414,8 +425,8 @@ namespace LemmaSharp.Classes {
                 aBestRules[i] = new RuleWeighted(elExamples.Rules[binRead.ReadString()], binRead.ReadDouble());
             }
 
+            // weight, start, end
             dWeight = binRead.ReadDouble();
-
             iStart = binRead.ReadInt32();
             iEnd = binRead.ReadInt32();
             this.elExamples = elExamples;

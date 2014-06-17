@@ -110,3 +110,6 @@ UpgradeLog*.XML
 # binaries
 *.exe
 *.snk
+
+# Output folders
+Output/

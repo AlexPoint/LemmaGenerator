@@ -40,13 +40,13 @@ namespace LemmaSharp.Classes {
 
         private LemmaTreeNode LtrRootNodeSafe {
             get {
-                if (LtnRootNode == null) BuildModel();
+                if (LtnRootNode == null){ BuildModel();}
                 return LtnRootNode;
             }
         }
         private LemmaTreeNode LtrRootNodeFrontSafe {
             get {
-                if (LtnRootNodeFront == null && Lsett.bBuildFrontLemmatizer) BuildModel();
+                if (LtnRootNodeFront == null && Lsett.bBuildFrontLemmatizer){ BuildModel();}
                 return LtnRootNodeFront;
             }
         }
@@ -155,7 +155,7 @@ namespace LemmaSharp.Classes {
         }
 
         
-        // Serialization Functions (Binary) ------------
+        // Serialization Functions (Regular) ------------
 
         public void Serialize(StreamWriter sWrt, bool bSerializeExamples)
         {
@@ -170,38 +170,45 @@ namespace LemmaSharp.Classes {
                 ElExamples.GetFrontRearExampleList(true).Serialize(sWrt, bSerializeExamples, false);
             }
 
-            LtnRootNode.Serialize(sWrt);
+            //LtnRootNode.Serialize(sWrt);
             if (Lsett.bBuildFrontLemmatizer)
             {
                 LtnRootNodeFront.Serialize(sWrt);
             }
         }
+
+        // Serialization Functions (Binary) ------------
+
         public void Serialize(BinaryWriter binWrt, bool bSerializeExamples) {
+            // settings
             Lsett.Serialize(binWrt);
 
+            // examples
             binWrt.Write(bSerializeExamples);
             ElExamples.Serialize(binWrt, bSerializeExamples, false);
-
             if (!bSerializeExamples) {
                 ElExamples.GetFrontRearExampleList(false).Serialize(binWrt, bSerializeExamples, false);
                 ElExamples.GetFrontRearExampleList(true).Serialize(binWrt, bSerializeExamples, false);
             }
 
-            //LtnRootNode.Serialize(binWrt);
+            // root node
+            LtnRootNode.Serialize(binWrt);
+            
+            // root node front
             if (Lsett.bBuildFrontLemmatizer)
             {
                 LtnRootNodeFront.Serialize(binWrt);
             }
         }
         public void Deserialize(BinaryReader binRead) {
+            // serttings
             Lsett = new LemmatizerSettings(binRead);
 
+            // examples
             bool bSerializeExamples = binRead.ReadBoolean();
             ElExamples = new ExampleList(binRead, Lsett);
-
             ExampleList elExamplesRear;
             ExampleList elExamplesFront;
-
             if (bSerializeExamples) {
                 elExamplesRear = ElExamples.GetFrontRearExampleList(false);
                 elExamplesFront = ElExamples.GetFrontRearExampleList(true);
@@ -211,11 +218,11 @@ namespace LemmaSharp.Classes {
                 elExamplesFront = new ExampleList(binRead, Lsett);
             }                
 
-            if (!Lsett.bBuildFrontLemmatizer) {
-                LtnRootNode = new LemmaTreeNode(binRead, Lsett, ElExamples, null);
-            }
-            else {
-                LtnRootNode = new LemmaTreeNode(binRead, Lsett,  elExamplesRear, null);
+            // root node
+            LtnRootNode = new LemmaTreeNode(binRead, Lsett, Lsett.bBuildFrontLemmatizer ? elExamplesRear : ElExamples, null);
+
+            // root node front
+            if (Lsett.bBuildFrontLemmatizer) {
                 LtnRootNodeFront = new LemmaTreeNode(binRead, Lsett, elExamplesFront, null);
             }
         }
@@ -347,7 +354,9 @@ namespace LemmaSharp.Classes {
                 encoder.WriteCoderProperties(streamOut);
                 Int64 fileSize = msTemp.Length;
                 for (int i = 0; i < 8; i++)
+                {
                     streamOut.WriteByte((Byte) (fileSize >> (8*i)));
+                }
                 encoder.Code(msTemp, streamOut, -1, -1, null);
                 binWrtTemp.Close();
                 msTemp.Close();
@@ -363,7 +372,9 @@ namespace LemmaSharp.Classes {
                 encoder.WriteCoderProperties(streamOut);
                 Int64 fileSize = msTemp.Length;
                 for (int i = 0; i < 8; i++)
-                    streamOut.WriteByte((Byte)(fileSize >> (8 * i)));
+                {
+                    streamOut.WriteByte((Byte) (fileSize >> (8*i)));
+                }
                 encoder.Code(msTemp, streamOut, -1, -1, null);
                 sWrtTemp.Close();
                 msTemp.Close();
