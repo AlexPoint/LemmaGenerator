@@ -82,7 +82,9 @@ namespace LemmaSharp.Classes {
 
             //save refernce types if needed -------------------------
             if (bThisTopObject)
-                 lsett.Serialize(binWrt);
+            {
+                lsett.Serialize(binWrt);
+            }
 
             //save list items ---------------------------------------
             int iCount = this.Count;

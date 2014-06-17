@@ -5,7 +5,7 @@ using System.IO;
 
 namespace LemmaSharp.Classes {
 
-    [Serializable()]
+    [Serializable]
     public class LemmaTreeNode : ILemmatizerModel {
         
         // Private Variables ---------------------------------

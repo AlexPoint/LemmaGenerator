@@ -114,7 +114,7 @@ namespace LemmaSharp.Classes {
 
                 AddExample(sWord, sLemma, dWeight, sMsd);
             }
-            if (iError == 50){ Console.WriteLine("  Parsing stopped because of too many (50) errors. Check format specification");}
+            if (iError == 50){ Console.WriteLine("Parsing stopped because of too many (50) errors. Check format specification");}
         }
         public LemmaExample AddExample(string sWord, string sLemma, double dWeight, string sMsd) {
             string sNewMsd = lsett.eMsdConsider != LemmatizerSettings.MsdConsideration.Ignore ? sMsd : null;
@@ -296,9 +296,10 @@ namespace LemmaSharp.Classes {
                 lsett.Serialize(binWrt);
             }
 
-            //
+            // serialize rules
             rlRules.Serialize(binWrt, false);
 
+            // serialize examples
             if (!bSerializeExamples) {
                 binWrt.Write(false); // lstExamples == null
                 binWrt.Write(0); // dictExamples.Count == 0
@@ -345,10 +346,11 @@ namespace LemmaSharp.Classes {
                 this.lsett = lsett;
             }
 
+            // deserialize rules
             rlRules = new RuleList(binRead, this.lsett);
 
+            // deserialize examples
             bool bCreateLstExamples = binRead.ReadBoolean();
-
             lstExamples = bCreateLstExamples ? new List<LemmaExample>() : null;
             dictExamples = new Dictionary<string, LemmaExample>();
 

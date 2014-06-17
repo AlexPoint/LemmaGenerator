@@ -192,12 +192,12 @@ namespace LemmaSharp.Classes {
             }
 
             // root node
-            LtnRootNode.Serialize(binWrt);
+            LtrRootNodeSafe.Serialize(binWrt);
             
             // root node front
             if (Lsett.bBuildFrontLemmatizer)
             {
-                LtnRootNodeFront.Serialize(binWrt);
+                LtrRootNodeFrontSafe.Serialize(binWrt);
             }
         }
         public void Deserialize(BinaryReader binRead) {

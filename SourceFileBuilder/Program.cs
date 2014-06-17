@@ -27,6 +27,7 @@ namespace SourceFileBuilder
             {
                 var testLemmatizer = new Lemmatizer(testStream);
             }
+            Console.WriteLine("OK");
 
             Console.ReadKey();
         }
@@ -46,7 +47,7 @@ namespace SourceFileBuilder
             // write output file
             using (var oStream = File.Create(outputFilePath))
             {
-                lemmatizer.Serialize(oStream, false, false);
+                lemmatizer.Serialize(oStream, true, Lemmatizer.Compression.Lzma, true);
             }
         }
     }
