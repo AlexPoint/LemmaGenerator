@@ -41,8 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IrregularVerb.cs" />
-    <Compile Include="IrregularVerbs.cs" />
+    <Compile Include="Classes\EnricherFileReader.cs" />
+    <Compile Include="Classes\IrregularVerb.cs" />
+    <Compile Include="Classes\IrregularVerbs.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -57,6 +58,9 @@
       <Project>{A39293C1-92D8-47B9-93A4-41F443B4F9E4}</Project>
       <Name>LemmaSharp</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Input\english-lemma-enricher.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
