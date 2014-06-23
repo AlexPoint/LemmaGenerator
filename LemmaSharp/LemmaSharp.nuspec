@@ -2,14 +2,14 @@
 <package >
   <metadata>
     <id>LemmaGenerator</id>
-    <version>1.0.6</version>
+    <version>1.1.0</version>
     <title>Lemmatizer generator</title>
     <authors>AlexPoint</authors>
     <owners>AlexPoint</owners>
     <projectUrl>https://github.com/AlexPoint/LemmaGenerator</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Generator of lemmatizers for several European languages</description>
-    <releaseNotes>Support lemmatization of uppercase words</releaseNotes>
+    <releaseNotes>Added exceptions to lemmatizers</releaseNotes>
     <copyright>Copyright 2014</copyright>
     <tags>lemmatization lemmatisation lemmatizer stemming stemmer</tags>
   </metadata>
