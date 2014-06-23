@@ -27,13 +27,8 @@ namespace Test
                 // add examples
                 var examples = new List<Tuple<string, string>>()
                 {
-                    new Tuple<string, string>("working", "work"),
-                    new Tuple<string, string>("left", "leave"),
-                    new Tuple<string, string>("theft", "theft"),
-                    new Tuple<string, string>("stolen", "steal"),
-                    new Tuple<string, string>("zincked", "zinc"),
-                    new Tuple<string, string>("bearing", "bear"),
-                    new Tuple<string, string>("beating", "beat"),
+                    new Tuple<string, string>("unattached", "unattach"),
+                    new Tuple<string, string>("attached", "attach")
                 };
                 foreach (var example in examples)
                 {

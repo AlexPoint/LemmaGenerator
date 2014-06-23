@@ -1,761 +1,760 @@
 // List of irregular verbs associated to their infinitive form
 // The format is "word lemma weight"
-// Undefined weight -> let the program determine the best weight
-abides abide
-abiding abide
-abode abide
-abided abide
-abidden abide
-alights alight
-alighting alight
-alit alight
-alighted alight
-arises arise
-arising arise
-arose arise
-arisen arise
-awakes awake
-awaking awake
-awoke awake
-awoken awake
-is be
-being be
-was be
-were be
-been be
-bears bear
-bearing bear
-bore bear
-born bear
-borne bear
-beats beat
-beating beat
-beat beat
-beaten beat
-becomes become
-becoming become
-became become
-become become
-begins begin
-beginning begin
-began begin
-begun begin
-beholds behold
-beholding behold
-beheld behold
-bends bend
-bending bend
-bent bend
-bets bet
-betting bet
-bet bet
-bids bid
-bidding bid
-bade bid
-bidden bid
-bid bid
-binds bind
-binding bind
-bound bind
-bites bite
-biting bite
-bit bite
-bitten bite
-bleeds bleed
-bleeding bleed
-bled bleed
-blows blow
-blowing blow
-blew blow
-blown blow
-breaks break
-breaking break
-broke break
-broken break
-breeds breed
-breeding breed
-bred breed
-brings bring
-bringing bring
-brought bring
-broadcasts broadcast
-broadcasting broadcast
-broadcast broadcast
-broadcasted broadcast
-builds build
-building build
-built build
-burns burn
-burning burn
-burnt burn
-burned burn
-bursts burst
-bursting burst
-burst burst
-busts bust
-busting bust
-bust bust
-buys buy
-buying buy
-bought buy
-casts cast
-casting cast
-cast cast
-catches catch
-catching catch
-caught catch
-chooses choose
-choosing choose
-chose choose
-chosen choose
-claps clap
-clapping clap
-clapped clap
-clapt clap
-clings cling
-clinging cling
-clung cling
-clothes clothe
-clothing clothe
-clad clothe
-clothed clothe
-comes come
-coming come
-came come
-come come
-costs cost
-costing cost
-cost cost
-creeps creep
-creeping creep
-crept creep
-cuts cut
-cutting cut
-cut cut
-dares dare
-daring dare
-dared dare
-durst dare
-deals deal
-dealing deal
-dealt deal
-digs dig
-digging dig
-dug dig
-dives dive
-diving dive
-dived dive
-dove dive
-does do
-doing do
-did do
-done do
-draws draw
-drawing draw
-drew draw
-drawn draw
-dreams dream
-dreaming dream
-dreamt dream
-dreamed dream
-drinks drink
-drinking drink
-drank drink
-drunk drink
-drives drive
-driving drive
-drove drive
-driven drive
-dwells dwell
-dwelling dwell
-dwelt dwell
-eats eat
-eating eat
-ate eat
-eaten eat
-falls fall
-falling fall
-fell fall
-fallen fall
-feeds feed
-feeding feed
-fed feed
-feels feel
-feeling feel
-felt feel
-fights fight
-fighting fight
-fought fight
-finds find
-finding find
-found find
-fits fit
-fitting fit
-fit fit
-fitted fit
-flees flee
-fleeing flee
-fled flee
-flings fling
-flinging fling
-flung fling
-flies fly
-flying fly
-flew fly
-flown fly
-forbids forbid
-forbidding forbid
-forbade forbid
-forbad forbid
-forbidden forbid
-forecasts forecast
-forecasting forecast
-forecast forecast
-forecasted forecast
-foresees foresee
-foreseeing foresee
-foresaw foresee
-foreseen foresee
-foretells foretell
-foretelling foretell
-foretold foretell
-forgets forget
-foregetting forget
-forgot forget
-forgotten forget
-forgives forgive
-forgiving forgive
-forgave forgive
-forgiven forgive
-forsakes forsake
-forsaking forsake
-forsook forsake
-forsaken forsake
-freezes freeze
-freezing freeze
-froze freeze
-frozen freeze
-frostbites frostbite
-frostbiting frostbite
-frostbit frostbite
-frostbitten frostbite
-gets get
-getting get
-got get
-gotten get
-gives give
-giving give
-gave give
-given give
-goes go
-going go
-went go
-gone go
-grinds grind
-grinding grind
-ground grind
-grows grow
-growing grow
-grew grow
-grown grow
-handwrites handwrite
-handwriting handwrite
-handwrote handwrite
-handwritten handwrite
-hangs hang
-hanging hang
-hung hang
-hanged hang
-has have
-having have
-had have
-hears hear
-hearing hear
-heard hear
-hides hide
-hiding hide
-hid hide
-hidden hide
-hits hit
-hitting hit
-hit hit
-holds hold
-holding hold
-held hold
-hurts hurt
-hurting hurt
-hurt hurt
-inlays inlay
-inlaying inlay
-inlaid inlay
-inputs input
-inputting input
-input input
-inputted input
-interlays interlay
-interlaying interlay
-interlaid interlay
-keeps keep
-keeping keep
-kept keep
-kneels kneel
-kneeling kneel
-knelt kneel
-kneeled kneel
-knits knit
-knitting knit
-knit knit
-knitted knit
-knows know
-knowing know
-knew know
-known know
-lays lay
-laying lay
-laid lay
-leads lead
-leading lead
-led lead
-leans lean
-leaning lean
-leant lean
-leaned lean
-leaps leap
-leaping leap
-leapt leap
-leaped leap
-learns learn
-learning learn
-learnt learn
-learned learn
-leaves leave
-leaving leave
-left leave
-lends lend
-lending lend
-lent lend
-lets let
-letting let
-let let
-lies lie
-lying lie
-lay lie
-lain lie
-lights light
-lighting light
-lit light
-loses lose
-losing lose
-lost lose
-makes make
-making make
-made make
-means mean
-meaning mean
-meant mean
-meets meet
-meeting meet
-met meet
-melts melt
-melting melt
-melted melt
-molten melt
-misleads mislead
-misleading mislead
-misled mislead
-mistakes mistake
-mistaking mistake
-mistook mistake
-mistaken mistake
-misunderstands misunderstand
-misunderstanding misunderstand
-misunderstood misunderstand
-misweds miswed
-miswedding miswed
-miswed miswed
-miswedded miswed
-mows mow
-mowing mow
-mowed mow
-mown mow
-overdraws overdraw
-overdrawing overdraw
-overdrew overdraw
-overdrawn overdraw
-overhears overhear
-overhearing overhear
-overheard overhear
-overtakes overtake
-overtaking overtake
-overtook overtake
-overtaken overtake
-pays pay
-paying pay
-paid pay
-presets preset
-presetting preset
-preset preset
-proves prove
-proving prove
-proved prove
-proven prove
-puts put
-putting put
-put put
-quits quit
-quitting quit
-quit quit
-re-proves re-prove
-re-proving re-prove
-re-proved re-prove
-re-proven re-prove
-reads read
-reading read
-read read
-rids rid
-ridding rid
-rid rid
-ridded rid
-rides ride
-riding ride
-rode ride
-ridden ride
-rings ring
-ringing ring
-rang ring
-rung ring
-rises rise
-rising rise
-rose rise
-risen rise
-rives rive
-riving rive
-rived rive
-riven rive
-runs run
-running run
-ran run
-run run
-saws saw
-sawing saw
-sawed saw
-sawn saw
-says say
-saying say
-said say
-sees see
-seeing see
-saw see
-seen see
-seeks seek
-seeking seek
-sought seek
-sells sell
-selling sell
-sold sell
-sends send
-sending send
-sent send
-sets set
-setting set
-set set
-sews sew
-sewing sew
-sewed sew
-sewn sew
-shakes shake
-shaking shake
-shook shake
-shaken shake
-shaves shave
-shaving shave
-shaved shave
-shaven shave
-shears shear
-shearing shear
-shore shear
-sheared shear
-shorn shear
-sheds shed
-shedding shed
-shed shed
-shines shine
-shining shine
-shone shine
-shoes shoe
-shoeing shoe
-shod shoe
-shoots shoot
-shooting shoot
-shot shoot
-shows show
-showing show
-showed show
-shown show
-shrinks shrink
-shrinking shrink
-shrank shrink
-shrunk shrink
-shuts shut
-shutting shut
-shut shut
-sings sing
-singing sing
-sang sing
-sung sing
-sinks sink
-sinking sink
-sank sink
-sunk sink
-sits sit
-sitting sit
-sat sit
-slays slay
-slaying slay
-slew slay
-slain slay
-sleeps sleep
-sleeping sleep
-slept sleep
-slides slide
-sliding slide
-slid slide
-slidden slide
-slings sling
-slinging sling
-slung sling
-slinks slink
-slinking slink
-slunk slink
-slits slit
-slitting slit
-slit slit
-smells smell
-smelling smell
-smelt smell
-smelled smell
-sneaks sneak
-sneaking sneak
-sneaked sneak
-snuck sneak
-soothsays soothsay
-soothsaying soothsay
-soothsaid soothsay
-sows sow
-sowing sow
-sowed sow
-sown sow
-speaks speak
-speaking speak
-spoke speak
-spoken speak
-speeds speed
-speeding speed
-sped speed
-speeded speed
-spells spell
-spelling spell
-spelt spell
-spelled spell
-spends spend
-spending spend
-spent spend
-spills spill
-spilling spill
-spilt spill
-spilled spill
-spins spin
-spinning spin
-span spin
-spun spin
-spits spit
-spitting spit
-spat spit
-spit spit
-splits split
-splitting split
-split split
-spoils spoil
-spoiling spoil
-spoilt spoil
-spoiled spoil
-spreads spread
-spreading spread
-spread spread
-springs spring
-springing spring
-sprang spring
-sprung spring
-stands stand
-standing stand
-stood stand
-steals steal
-stealing steal
-stole steal
-stolen steal
-sticks stick
-sticking stick
-stuck stick
-stings sting
-stinging sting
-stung sting
-stinks stink
-stinking stink
-stank stink
-stunk stink
-strides stride
-striding stride
-strode stride
-strided stride
-stridden stride
-strikes strike
-striking strike
-struck strike
-stricken strike
-strings string
-stringing string
-strung string
-strips strip
-stripping strip
-stript strip
-stripped strip
-strives strive
-striving strive
-strove strive
-striven strive
-sublets sublet
-subletting sublet
-sublet sublet
-sunburns sunburn
-sunburning sunburn
-sunburned sunburn
-sunburnt sunburn
-swears swear
-swearing swear
-swore swear
-sworn swear
-sweats sweat
-sweating sweat
-sweat sweat
-sweated sweat
-sweeps sweep
-sweeping sweep
-swept sweep
-sweeped sweep
-swells swell
-swelling swell
-swelled swell
-swollen swell
-swims swim
-swimming swim
-swam swim
-swum swim
-swings swing
-swinging swing
-swung swing
-takes take
-taking take
-took take
-taken take
-teaches teach
-teaching teach
-taught teach
-tears tear
-tearing tear
-tore tear
-torn tear
-tells tell
-telling tell
-told tell
-thinks think
-thinking think
-thought think
-thrives thrive
-thriving thrive
-throve thrive
-thrived thrive
-thriven thrive
-throws throw
-throwing throw
-threw throw
-thrown throw
-thrusts thrust
-thrusting thrust
-thrust thrust
-treads tread
-treading tread
-trod tread
-trodden tread
-undergoes undergo
-undergoing undergo
-underwent undergo
-undergone undergo
-understands understand
-understanding understand
-understood understand
-undertakes undertake
-undertaking undertake
-undertook undertake
-undertaken undertake
-upsets upset
-upsetting upset
-upset upset
-vexes vex
-vexing vex
-vext vex
-vexed vex
-wakes wake
-waking wake
-woke wake
-woken wake
-wears wear
-wearing wear
-wore wear
-worn wear
-weaves weave
-weaving weave
-wove weave
-woven weave
-weds wed
-wedding wed
-wed wed
-wedded wed
-weeps weep
-weeping weep
-wept weep
-wends wend
-wending wend
-wended wend
-went wend
-wets wet
-wetting wet
-wet wet
-wetted wet
-wins win
-winning win
-won win
-winds wind
-winding wind
-wound wind
-withdraws withdraw
-withdrawing withdraw
-withdrew withdraw
-withdrawn withdraw
-withholds withhold
-withholding withhold
-withheld withhold
-withstands withstand
-withstanding withstand
-withstood withstand
-wrings wring
-wringing wring
-wrung wring
-writes write
-writing write
-wrote write
-written write
-zincs zinc
-zincks zinc
-zincking zinc
-zinced zinc
-zincked zinc
+abides abide 10
+abiding abide 10
+abode abide 10
+abided abide 10
+abidden abide 10
+alights alight 10
+alighting alight 10
+alit alight 10
+alighted alight 10
+arises arise 10
+arising arise 10
+arose arise 10
+arisen arise 10
+awakes awake 10
+awaking awake 10
+awoke awake 10
+awoken awake 10
+is be 10
+being be 10
+was be 10
+were be 10
+been be 10
+bears bear 10
+bearing bear 10
+bore bear 10
+born bear 10
+borne bear 10
+beats beat 10
+beating beat 10
+beat beat 10
+beaten beat 10
+becomes become 10
+becoming become 10
+became become 10
+become become 10
+begins begin 10
+beginning begin 10
+began begin 10
+begun begin 10
+beholds behold 10
+beholding behold 10
+beheld behold 10
+bends bend 10
+bending bend 10
+bent bend 10
+bets bet 10
+betting bet 10
+bet bet 10
+bids bid 10
+bidding bid 10
+bade bid 10
+bidden bid 10
+bid bid 10
+binds bind 10
+binding bind 10
+bound bind 10
+bites bite 10
+biting bite 10
+bit bite 10
+bitten bite 10
+bleeds bleed 10
+bleeding bleed 10
+bled bleed 10
+blows blow 10
+blowing blow 10
+blew blow 10
+blown blow 10
+breaks break 10
+breaking break 10
+broke break 10
+broken break 10
+breeds breed 10
+breeding breed 10
+bred breed 10
+brings bring 10
+bringing bring 10
+brought bring 10
+broadcasts broadcast 10
+broadcasting broadcast 10
+broadcast broadcast 10
+broadcasted broadcast 10
+builds build 10
+building build 10
+built build 10
+burns burn 10
+burning burn 10
+burnt burn 10
+burned burn 10
+bursts burst 10
+bursting burst 10
+burst burst 10
+busts bust 10
+busting bust 10
+bust bust 10
+buys buy 10
+buying buy 10
+bought buy 10
+casts cast 10
+casting cast 10
+cast cast 10
+catches catch 10
+catching catch 10
+caught catch 10
+chooses choose 10
+choosing choose 10
+chose choose 10
+chosen choose 10
+claps clap 10
+clapping clap 10
+clapped clap 10
+clapt clap 10
+clings cling 10
+clinging cling 10
+clung cling 10
+clothes clothe 10
+clothing clothe 10
+clad clothe 10
+clothed clothe 10
+comes come 10
+coming come 10
+came come 10
+come come 10
+costs cost 10
+costing cost 10
+cost cost 10
+creeps creep 10
+creeping creep 10
+crept creep 10
+cuts cut 10
+cutting cut 10
+cut cut 10
+dares dare 10
+daring dare 10
+dared dare 10
+durst dare 10
+deals deal 10
+dealing deal 10
+dealt deal 10
+digs dig 10
+digging dig 10
+dug dig 10
+dives dive 10
+diving dive 10
+dived dive 10
+dove dive 10
+does do 10
+doing do 10
+did do 10
+done do 10
+draws draw 10
+drawing draw 10
+drew draw 10
+drawn draw 10
+dreams dream 10
+dreaming dream 10
+dreamt dream 10
+dreamed dream 10
+drinks drink 10
+drinking drink 10
+drank drink 10
+drunk drink 10
+drives drive 10
+driving drive 10
+drove drive 10
+driven drive 10
+dwells dwell 10
+dwelling dwell 10
+dwelt dwell 10
+eats eat 10
+eating eat 10
+ate eat 10
+eaten eat 10
+falls fall 10
+falling fall 10
+fell fall 10
+fallen fall 10
+feeds feed 10
+feeding feed 10
+fed feed 10
+feels feel 10
+feeling feel 10
+felt feel 10
+fights fight 10
+fighting fight 10
+fought fight 10
+finds find 10
+finding find 10
+found find 10
+fits fit 10
+fitting fit 10
+fit fit 10
+fitted fit 10
+flees flee 10
+fleeing flee 10
+fled flee 10
+flings fling 10
+flinging fling 10
+flung fling 10
+flies fly 10
+flying fly 10
+flew fly 10
+flown fly 10
+forbids forbid 10
+forbidding forbid 10
+forbade forbid 10
+forbad forbid 10
+forbidden forbid 10
+forecasts forecast 10
+forecasting forecast 10
+forecast forecast 10
+forecasted forecast 10
+foresees foresee 10
+foreseeing foresee 10
+foresaw foresee 10
+foreseen foresee 10
+foretells foretell 10
+foretelling foretell 10
+foretold foretell 10
+forgets forget 10
+foregetting forget 10
+forgot forget 10
+forgotten forget 10
+forgives forgive 10
+forgiving forgive 10
+forgave forgive 10
+forgiven forgive 10
+forsakes forsake 10
+forsaking forsake 10
+forsook forsake 10
+forsaken forsake 10
+freezes freeze 10
+freezing freeze 10
+froze freeze 10
+frozen freeze 10
+frostbites frostbite 10
+frostbiting frostbite 10
+frostbit frostbite 10
+frostbitten frostbite 10
+gets get 10
+getting get 10
+got get 10
+gotten get 10
+gives give 10
+giving give 10
+gave give 10
+given give 10
+goes go 10
+going go 10
+went go 10
+gone go 10
+grinds grind 10
+grinding grind 10
+ground grind 10
+grows grow 10
+growing grow 10
+grew grow 10
+grown grow 10
+handwrites handwrite 10
+handwriting handwrite 10
+handwrote handwrite 10
+handwritten handwrite 10
+hangs hang 10
+hanging hang 10
+hung hang 10
+hanged hang 10
+has have 10
+having have 10
+had have 10
+hears hear 10
+hearing hear 10
+heard hear 10
+hides hide 10
+hiding hide 10
+hid hide 10
+hidden hide 10
+hits hit 10
+hitting hit 10
+hit hit 10
+holds hold 10
+holding hold 10
+held hold 10
+hurts hurt 10
+hurting hurt 10
+hurt hurt 10
+inlays inlay 10
+inlaying inlay 10
+inlaid inlay 10
+inputs input 10
+inputting input 10
+input input 10
+inputted input 10
+interlays interlay 10
+interlaying interlay 10
+interlaid interlay 10
+keeps keep 10
+keeping keep 10
+kept keep 10
+kneels kneel 10
+kneeling kneel 10
+knelt kneel 10
+kneeled kneel 10
+knits knit 10
+knitting knit 10
+knit knit 10
+knitted knit 10
+knows know 10
+knowing know 10
+knew know 10
+known know 10
+lays lay 10
+laying lay 10
+laid lay 10
+leads lead 10
+leading lead 10
+led lead 10
+leans lean 10
+leaning lean 10
+leant lean 10
+leaned lean 10
+leaps leap 10
+leaping leap 10
+leapt leap 10
+leaped leap 10
+learns learn 10
+learning learn 10
+learnt learn 10
+learned learn 10
+leaves leave 10
+leaving leave 10
+left leave 10
+lends lend 10
+lending lend 10
+lent lend 10
+lets let 10
+letting let 10
+let let 10
+lies lie 10
+lying lie 10
+lay lie 10
+lain lie 10
+lights light 10
+lighting light 10
+lit light 10
+loses lose 10
+losing lose 10
+lost lose 10
+makes make 10
+making make 10
+made make 10
+means mean 10
+meaning mean 10
+meant mean 10
+meets meet 10
+meeting meet 10
+met meet 10
+melts melt 10
+melting melt 10
+melted melt 10
+molten melt 10
+misleads mislead 10
+misleading mislead 10
+misled mislead 10
+mistakes mistake 10
+mistaking mistake 10
+mistook mistake 10
+mistaken mistake 10
+misunderstands misunderstand 10
+misunderstanding misunderstand 10
+misunderstood misunderstand 10
+misweds miswed 10
+miswedding miswed 10
+miswed miswed 10
+miswedded miswed 10
+mows mow 10
+mowing mow 10
+mowed mow 10
+mown mow 10
+overdraws overdraw 10
+overdrawing overdraw 10
+overdrew overdraw 10
+overdrawn overdraw 10
+overhears overhear 10
+overhearing overhear 10
+overheard overhear 10
+overtakes overtake 10
+overtaking overtake 10
+overtook overtake 10
+overtaken overtake 10
+pays pay 10
+paying pay 10
+paid pay 10
+presets preset 10
+presetting preset 10
+preset preset 10
+proves prove 10
+proving prove 10
+proved prove 10
+proven prove 10
+puts put 10
+putting put 10
+put put 10
+quits quit 10
+quitting quit 10
+quit quit 10
+re-proves re-prove 10
+re-proving re-prove 10
+re-proved re-prove 10
+re-proven re-prove 10
+reads read 10
+reading read 10
+read read 10
+rids rid 10
+ridding rid 10
+rid rid 10
+ridded rid 10
+rides ride 10
+riding ride 10
+rode ride 10
+ridden ride 10
+rings ring 10
+ringing ring 10
+rang ring 10
+rung ring 10
+rises rise 10
+rising rise 10
+rose rise 10
+risen rise 10
+rives rive 10
+riving rive 10
+rived rive 10
+riven rive 10
+runs run 10
+running run 10
+ran run 10
+run run 10
+saws saw 10
+sawing saw 10
+sawed saw 10
+sawn saw 10
+says say 10
+saying say 10
+said say 10
+sees see 10
+seeing see 10
+saw see 10
+seen see 10
+seeks seek 10
+seeking seek 10
+sought seek 10
+sells sell 10
+selling sell 10
+sold sell 10
+sends send 10
+sending send 10
+sent send 10
+sets set 10
+setting set 10
+set set 10
+sews sew 10
+sewing sew 10
+sewed sew 10
+sewn sew 10
+shakes shake 10
+shaking shake 10
+shook shake 10
+shaken shake 10
+shaves shave 10
+shaving shave 10
+shaved shave 10
+shaven shave 10
+shears shear 10
+shearing shear 10
+shore shear 10
+sheared shear 10
+shorn shear 10
+sheds shed 10
+shedding shed 10
+shed shed 10
+shines shine 10
+shining shine 10
+shone shine 10
+shoes shoe 10
+shoeing shoe 10
+shod shoe 10
+shoots shoot 10
+shooting shoot 10
+shot shoot 10
+shows show 10
+showing show 10
+showed show 10
+shown show 10
+shrinks shrink 10
+shrinking shrink 10
+shrank shrink 10
+shrunk shrink 10
+shuts shut 10
+shutting shut 10
+shut shut 10
+sings sing 10
+singing sing 10
+sang sing 10
+sung sing 10
+sinks sink 10
+sinking sink 10
+sank sink 10
+sunk sink 10
+sits sit 10
+sitting sit 10
+sat sit 10
+slays slay 10
+slaying slay 10
+slew slay 10
+slain slay 10
+sleeps sleep 10
+sleeping sleep 10
+slept sleep 10
+slides slide 10
+sliding slide 10
+slid slide 10
+slidden slide 10
+slings sling 10
+slinging sling 10
+slung sling 10
+slinks slink 10
+slinking slink 10
+slunk slink 10
+slits slit 10
+slitting slit 10
+slit slit 10
+smells smell 10
+smelling smell 10
+smelt smell 10
+smelled smell 10
+sneaks sneak 10
+sneaking sneak 10
+sneaked sneak 10
+snuck sneak 10
+soothsays soothsay 10
+soothsaying soothsay 10
+soothsaid soothsay 10
+sows sow 10
+sowing sow 10
+sowed sow 10
+sown sow 10
+speaks speak 10
+speaking speak 10
+spoke speak 10
+spoken speak 10
+speeds speed 10
+speeding speed 10
+sped speed 10
+speeded speed 10
+spells spell 10
+spelling spell 10
+spelt spell 10
+spelled spell 10
+spends spend 10
+spending spend 10
+spent spend 10
+spills spill 10
+spilling spill 10
+spilt spill 10
+spilled spill 10
+spins spin 10
+spinning spin 10
+span spin 10
+spun spin 10
+spits spit 10
+spitting spit 10
+spat spit 10
+spit spit 10
+splits split 10
+splitting split 10
+split split 10
+spoils spoil 10
+spoiling spoil 10
+spoilt spoil 10
+spoiled spoil 10
+spreads spread 10
+spreading spread 10
+spread spread 10
+springs spring 10
+springing spring 10
+sprang spring 10
+sprung spring 10
+stands stand 10
+standing stand 10
+stood stand 10
+steals steal 10
+stealing steal 10
+stole steal 10
+stolen steal 10
+sticks stick 10
+sticking stick 10
+stuck stick 10
+stings sting 10
+stinging sting 10
+stung sting 10
+stinks stink 10
+stinking stink 10
+stank stink 10
+stunk stink 10
+strides stride 10
+striding stride 10
+strode stride 10
+strided stride 10
+stridden stride 10
+strikes strike 10
+striking strike 10
+struck strike 10
+stricken strike 10
+strings string 10
+stringing string 10
+strung string 10
+strips strip 10
+stripping strip 10
+stript strip 10
+stripped strip 10
+strives strive 10
+striving strive 10
+strove strive 10
+striven strive 10
+sublets sublet 10
+subletting sublet 10
+sublet sublet 10
+sunburns sunburn 10
+sunburning sunburn 10
+sunburned sunburn 10
+sunburnt sunburn 10
+swears swear 10
+swearing swear 10
+swore swear 10
+sworn swear 10
+sweats sweat 10
+sweating sweat 10
+sweat sweat 10
+sweated sweat 10
+sweeps sweep 10
+sweeping sweep 10
+swept sweep 10
+sweeped sweep 10
+swells swell 10
+swelling swell 10
+swelled swell 10
+swollen swell 10
+swims swim 10
+swimming swim 10
+swam swim 10
+swum swim 10
+swings swing 10
+swinging swing 10
+swung swing 10
+takes take 10
+taking take 10
+took take 10
+taken take 10
+teaches teach 10
+teaching teach 10
+taught teach 10
+tears tear 10
+tearing tear 10
+tore tear 10
+torn tear 10
+tells tell 10
+telling tell 10
+told tell 10
+thinks think 10
+thinking think 10
+thought think 10
+thrives thrive 10
+thriving thrive 10
+throve thrive 10
+thrived thrive 10
+thriven thrive 10
+throws throw 10
+throwing throw 10
+threw throw 10
+thrown throw 10
+thrusts thrust 10
+thrusting thrust 10
+thrust thrust 10
+treads tread 10
+treading tread 10
+trod tread 10
+trodden tread 10
+undergoes undergo 10
+undergoing undergo 10
+underwent undergo 10
+undergone undergo 10
+understands understand 10
+understanding understand 10
+understood understand 10
+undertakes undertake 10
+undertaking undertake 10
+undertook undertake 10
+undertaken undertake 10
+upsets upset 10
+upsetting upset 10
+upset upset 10
+vexes vex 10
+vexing vex 10
+vext vex 10
+vexed vex 10
+wakes wake 10
+waking wake 10
+woke wake 10
+woken wake 10
+wears wear 10
+wearing wear 10
+wore wear 10
+worn wear 10
+weaves weave 10
+weaving weave 10
+wove weave 10
+woven weave 10
+weds wed 10
+wedding wed 10
+wed wed 10
+wedded wed 10
+weeps weep 10
+weeping weep 10
+wept weep 10
+wends wend 10
+wending wend 10
+wended wend 10
+went wend 10
+wets wet 10
+wetting wet 10
+wet wet 10
+wetted wet 10
+wins win 10
+winning win 10
+won win 10
+winds wind 10
+winding wind 10
+wound wind 10
+withdraws withdraw 10
+withdrawing withdraw 10
+withdrew withdraw 10
+withdrawn withdraw 10
+withholds withhold 10
+withholding withhold 10
+withheld withhold 10
+withstands withstand 10
+withstanding withstand 10
+withstood withstand 10
+wrings wring 10
+wringing wring 10
+wrung wring 10
+writes write 10
+writing write 10
+wrote write 10
+written write 10
+zincs zinc 10
+zincks zinc 10
+zincking zinc 10
+zinced zinc 10
+zincked zinc 10
