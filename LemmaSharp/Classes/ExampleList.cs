@@ -116,6 +116,7 @@ namespace LemmaSharp.Classes {
             }
             if (iError == 50){ Console.WriteLine("Parsing stopped because of too many (50) errors. Check format specification");}
         }
+
         public LemmaExample AddExample(string sWord, string sLemma, double dWeight, string sMsd) {
             string sNewMsd = lsett.eMsdConsider != LemmatizerSettings.MsdConsideration.Ignore ? sMsd : null;
             var leNew = new LemmaExample(sWord, sLemma, dWeight, sNewMsd, rlRules, lsett);

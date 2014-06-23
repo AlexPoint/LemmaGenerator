@@ -69,6 +69,7 @@
     <EmbeddedResource Include="Data\full7z-multext-it.lem" />
     <EmbeddedResource Include="Data\full7z-multext-sp.lem" />
     <None Include="Data\Custom\english.lem" />
+    <None Include="Data\Custom\full7z-mlteast-en-modified.lem" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LemmaSharp\LemmaSharp.csproj">

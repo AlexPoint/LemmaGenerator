@@ -219,6 +219,8 @@ namespace LemmaSharp.Classes {
         // String utilities ------
         public static bool IsFullyUpper(string value)
         {
+            if (string.IsNullOrEmpty(value)){ return false; }
+
             // Consider string to be uppercase if it has no lowercase letters.
             for (int i = 0; i < value.Length; i++)
             {

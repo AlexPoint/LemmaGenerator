@@ -1,4 +1,5 @@
 ﻿// Add missing lemmas in this file to enrich the lemmatizer.
 // The format is "word lemma weight"
 // Ex: attached attach 1
+// If undefined weight -> let the program determine the best weight
 unattached unattach 1

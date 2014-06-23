@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization;
 using System.IO.Compression;
@@ -19,6 +20,7 @@ namespace LemmaSharp.Classes {
         protected ExampleList ElExamples;
         protected LemmaTreeNode LtnRootNode;
         protected LemmaTreeNode LtnRootNodeFront;
+        protected Dictionary<string, string> Exceptions = new Dictionary<string, string>();
         
 
         // Constructor(s) & Destructor(s) ------
@@ -106,6 +108,15 @@ namespace LemmaSharp.Classes {
         public void DropExamples() {
             ElExamples.DropExamples();
         }
+
+        public void AddException(string word, string lemma)
+        {
+            if (!this.Exceptions.ContainsKey(word.ToLower()))
+            {
+                this.Exceptions.Add(word.ToLower(), lemma.ToLower());
+            }
+        }
+
         public void FinalizeAdditions() {
             ElExamples.FinalizeAdditions();
         }
@@ -127,14 +138,19 @@ namespace LemmaSharp.Classes {
             }
         }
 
-        public string Lemmatize(string sWord) {
+        public string Lemmatize(string word) {
+            if (this.Exceptions.ContainsKey(word.ToLower()))
+            {
+                return this.Exceptions[word.ToLower()];
+            }
+
             if (!Lsett.bBuildFrontLemmatizer)
             {
-                return LtrRootNodeSafe.Lemmatize(sWord);
+                return LtrRootNodeSafe.Lemmatize(word);
             }
             else
             {
-                string sWordFront = LemmaExample.StringReverse(sWord);
+                string sWordFront = LemmaExample.StringReverse(word);
                 string sLemmaFront = LtrRootNodeFrontSafe.Lemmatize(sWordFront);
                 string sWordRear = LemmaExample.StringReverse(sLemmaFront);
                 return LtrRootNodeSafe.Lemmatize(sWordRear);
@@ -147,10 +163,12 @@ namespace LemmaSharp.Classes {
         public void GetObjectData(SerializationInfo info, StreamingContext context) {
             info.AddValue("lsett", Lsett);
             info.AddValue("elExamples", ElExamples);
+            info.AddValue("exceptions", Exceptions);
         }
         public Lemmatizer(SerializationInfo info, StreamingContext context): this() {
             Lsett = (LemmatizerSettings)info.GetValue("lsett", typeof(LemmatizerSettings));
             ElExamples = (ExampleList)info.GetValue("elExamples", typeof(ExampleList));
+            Exceptions = (Dictionary<string, string>) info.GetValue("exceptions", typeof (Dictionary<string, string>));
             this.BuildModel();
         }
 
@@ -175,6 +193,12 @@ namespace LemmaSharp.Classes {
             {
                 LtnRootNodeFront.Serialize(sWrt);
             }
+
+            // exceptions
+            foreach (var exception in this.Exceptions)
+            {
+                sWrt.WriteLine("{0} {1}", exception.Key, exception.Value);
+            }
         }
 
         // Serialization Functions (Binary) ------------
@@ -198,6 +222,13 @@ namespace LemmaSharp.Classes {
             if (Lsett.bBuildFrontLemmatizer)
             {
                 LtrRootNodeFrontSafe.Serialize(binWrt);
+            }
+
+            // exceptions
+            binWrt.Write(this.Exceptions.Count);
+            foreach (var exception in Exceptions)
+            {
+                binWrt.Write(string.Format("{0} {1}", exception.Key, exception.Value));
             }
         }
         public void Deserialize(BinaryReader binRead) {
@@ -224,6 +255,22 @@ namespace LemmaSharp.Classes {
             // root node front
             if (Lsett.bBuildFrontLemmatizer) {
                 LtnRootNodeFront = new LemmaTreeNode(binRead, Lsett, elExamplesFront, null);
+            }
+
+            // exceptions
+            try
+            {
+                var nbOfExceptions = binRead.ReadInt32();
+                for (var i = 0; i < nbOfExceptions; i++)
+                {
+                    var exception = binRead.ReadString();
+                    var parts = exception.Split(' ');
+                    this.AddException(parts[0], parts[1]);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception when deserializing Lemmatizer: {0}", ex);
             }
         }
 
