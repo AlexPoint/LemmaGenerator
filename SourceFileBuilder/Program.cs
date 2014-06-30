@@ -78,7 +78,7 @@ namespace SourceFileBuilder
                 lemmatizer.AddExample(word, lemma);
                 // if still doesn't work --> add exception
                 var computedLemma2 = lemmatizer.Lemmatize(word);
-                if (computedLemma2 != word)
+                if (computedLemma2 != lemma)
                 {
                     Console.WriteLine("Added lemma exception: {0} -> {1}", word, lemma);
                     lemmatizer.AddException(word, lemma);
