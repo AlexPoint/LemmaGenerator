@@ -28,7 +28,8 @@ namespace Test
                 var examples = new List<Tuple<string, string>>()
                 {
                     new Tuple<string, string>("got", "get"),
-                    new Tuple<string, string>("attached", "attach")
+                    new Tuple<string, string>("attached", "attach"),
+                    new Tuple<string, string>("went", "go"),
                 };
                 foreach (var example in examples)
                 {
