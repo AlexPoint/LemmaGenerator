@@ -42,8 +42,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\EnricherFileReader.cs" />
-    <Compile Include="Classes\IrregularVerb.cs" />
-    <Compile Include="Classes\IrregularVerbs.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

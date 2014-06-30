@@ -257,7 +257,8 @@ namespace LemmaSharp.Classes {
                 LtnRootNodeFront = new LemmaTreeNode(binRead, Lsett, elExamplesFront, null);
             }
 
-            // exceptions
+            // exceptions - use try catch for retro compatibility
+            // --> this section is missing in the old lemmatizer files
             try
             {
                 var nbOfExceptions = binRead.ReadInt32();
@@ -270,7 +271,7 @@ namespace LemmaSharp.Classes {
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Exception when deserializing Lemmatizer: {0}", ex);
+                Console.WriteLine("Couldn't deserialize exceptions in Lemmatizer file");
             }
         }
 
