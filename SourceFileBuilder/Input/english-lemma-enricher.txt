@@ -2,4 +2,25 @@
 // The format is "word lemma weight"
 // Ex: attached attach 1
 // If undefined weight -> let the program determine the best weight
-unattached unattach 10
+unattached unattach
+acting act
+balled ball
+ballsed ballse
+bottomed bottom
+clouded cloud
+cozied cozy
+fiddling fiddle
+following follow
+homing home
+leveled level
+livened liven
+magicked magic
+mouthing mouth
+pootling pootle
+sexed sex
+spirited spirit
+stove stave
+vacuumed vacuum
+whiled while
+wigged wig
+zoned zone
