@@ -14,6 +14,7 @@ namespace SourceFileBuilder
     {
         static void Main(string[] args)
         {
+
             var currentDirectory = Environment.CurrentDirectory + "/../../";
             var lemmatizerFilePath = currentDirectory + "../Test/Data/full7z-mlteast-en.lem";
 
@@ -23,23 +24,17 @@ namespace SourceFileBuilder
 
             var enricherFilePaths = Directory.GetFiles(currentDirectory + "Input/");
 
-            EnrichLemmatizerFile(lemmatizerFilePath, outputFilePath, enricherFilePaths);
 
-            Console.WriteLine("OK");
-            Console.ReadKey();
-        }
-
-        private static void EnrichLemmatizerFile(string lemmatizerFilePath, string outputFilePath,
-            IEnumerable<string> enricherFilePaths)
-        {
             using (var stream = File.OpenRead(lemmatizerFilePath))
             {
+                // create base lemmatizer with data in the base source file
                 var lemmatizer = new Lemmatizer(stream);
-                // enrich lemmatizer with every other file
+
+                // then, enrich lemmatizer with every other files
                 foreach (var filePath in enricherFilePaths)
-	            {
-		            EnrichLemmatizer(lemmatizer, filePath);
-	            }
+                {
+                    EnrichLemmatizerWithDataFile(lemmatizer, filePath);
+                }
 
                 // persist lemmatizer in output file
                 Console.WriteLine("Writing output file...");
@@ -49,17 +44,21 @@ namespace SourceFileBuilder
                 }
                 Console.WriteLine("Outuput file written at {0}", outputFilePath);
             }
+
+            Console.WriteLine("OK");
+            Console.ReadKey();
         }
 
-        private static void EnrichLemmatizer(Lemmatizer lemmatizer, string enricherFilePath)
+
+        private static void EnrichLemmatizerWithDataFile(Lemmatizer lemmatizer, string enricherFilePath)
         {
             var fileReader = new EnricherFileReader(enricherFilePath);
             var newLemmas = fileReader.ReadAllLemmaEntries();
             
-            EnrichLemmatizer(lemmatizer, newLemmas);
+            EnrichLemmatizerWithExamples(lemmatizer, newLemmas);
         }
         
-        private static void EnrichLemmatizer(Lemmatizer lemmatizer, IEnumerable<Tuple<string, string, int>> wordsAndLemmaToAdd)
+        private static void EnrichLemmatizerWithExamples(Lemmatizer lemmatizer, IEnumerable<Tuple<string, string, int>> wordsAndLemmaToAdd)
         {
             // add new words and lemma
             foreach (var wordAndLemma in wordsAndLemmaToAdd)
@@ -70,12 +69,15 @@ namespace SourceFileBuilder
 
         private static void AddExampleOrException(Lemmatizer lemmatizer, string word, string lemma)
         {
+            // compute the lemma of this example
             var computedLemma = lemmatizer.Lemmatize(word);
 
             if(computedLemma != lemma)
             {
-                // add example
+                // if the computed lemma is different from what we expect, 
+                // add this example to lemmatizer (lemmatizer can then deduce a new rule and succeed, or still fail)
                 lemmatizer.AddExample(word, lemma);
+
                 // if still doesn't work --> add exception
                 var computedLemma2 = lemmatizer.Lemmatize(word);
                 if (computedLemma2 != lemma)

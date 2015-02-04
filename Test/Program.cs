@@ -27,7 +27,7 @@ namespace Test
                 // add examples
                 var examples = new List<Tuple<string, string>>()
                 {
-                    new Tuple<string,string>("acting","act"),
+                    /*new Tuple<string,string>("acting","act"),
                     new Tuple<string,string>("balled","ball"),
                     new Tuple<string,string>("balled","ball"),
                     new Tuple<string,string>("ballsed","balls"),
@@ -75,7 +75,32 @@ namespace Test
                     new Tuple<string,string>("vacuumed","vacuum"),
                     new Tuple<string,string>("whiled","while"),
                     new Tuple<string,string>("wigged","wig"),
-                    new Tuple<string,string>("zoned","zone"),
+                    new Tuple<string,string>("zoned","zone"),*/
+                    new Tuple<string,string>("don't","do"),
+                    new Tuple<string,string>("doesn't","do"),
+                    new Tuple<string,string>("didn't","did"),
+                    new Tuple<string,string>("won't","will"),
+                    new Tuple<string,string>("shan't","shall"),
+                    new Tuple<string,string>("can't","can"),
+                    new Tuple<string,string>("couldn't","could"),
+                    new Tuple<string,string>("wouldn't","would"),
+                    new Tuple<string,string>("shouldn't","should"),
+                    new Tuple<string,string>("mustn't","must"),
+                    new Tuple<string,string>("mightn't","might"),
+                    new Tuple<string,string>("oughtn't","ought"),
+                    new Tuple<string,string>("needn't","need"),
+                    new Tuple<string,string>("aren't","are"),
+                    new Tuple<string,string>("isn't","be"),
+                    new Tuple<string,string>("wasn't","be"),
+                    new Tuple<string,string>("weren't","be"),
+                    new Tuple<string,string>("haven't","have"),
+                    new Tuple<string,string>("hasn't","have"),
+                    new Tuple<string,string>("hadn't","have"),
+                    new Tuple<string,string>("'s", "'s"),
+                    new Tuple<string,string>("'ve", "have"),
+                    new Tuple<string,string>("'m", "be"),
+                    new Tuple<string,string>("'re", "be"),
+                    new Tuple<string,string>("'ll", "will"),
                 };
                 foreach (var example in examples)
                 {

@@ -1,0 +1,26 @@
+﻿// Add missing lemmas in this file to enrich the lemmatizer.
+don't do
+doesn't do
+didn't did
+won't will
+shan't shall
+can't can
+couldn't could
+wouldn't would
+shouldn't should
+mustn't must
+mightn't might
+oughtn't ought
+needn't need
+aren't are
+isn't be
+wasn't be
+weren't be
+haven't have
+hasn't have
+hadn't have
+'s 's
+'ve have
+'m be
+'re be
+'ll will
