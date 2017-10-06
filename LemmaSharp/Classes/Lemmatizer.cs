@@ -4,15 +4,18 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.IO.Compression;
 using SevenZip;
+using System.Diagnostics;
+using System.Collections.Concurrent;
 
-namespace LemmaSharp.Classes {
+namespace LemmaSharp.Classes
+{
 
     [Serializable]
-    public class Lemmatizer : ITrainableLemmatizer 
-        #if LATINO
+    public class Lemmatizer : ITrainableLemmatizer
+#if LATINO
         , Latino.ISerializable 
-        #endif 
-        {
+#endif
+    {
 
         // Private Variables -------------------
 
@@ -20,128 +23,172 @@ namespace LemmaSharp.Classes {
         protected ExampleList ElExamples;
         protected LemmaTreeNode LtnRootNode;
         protected LemmaTreeNode LtnRootNodeFront;
-        protected Dictionary<string, string> Exceptions = new Dictionary<string, string>();
-        
+        protected ConcurrentDictionary<string, string> Exceptions = new ConcurrentDictionary<string, string>();
+
 
         // Constructor(s) & Destructor(s) ------
 
         public Lemmatizer() : this(new LemmatizerSettings()) { }
-        public Lemmatizer(LemmatizerSettings lsett) { 
+        public Lemmatizer(LemmatizerSettings lsett)
+        {
             this.Lsett = lsett;
             this.ElExamples = new ExampleList(lsett);
             this.LtnRootNode = null;
             this.LtnRootNodeFront = null;
-        } 
+        }
 
-        public Lemmatizer(StreamReader srIn, string sFormat, LemmatizerSettings lsett): this(lsett) {
+        public Lemmatizer(StreamReader srIn, string sFormat, LemmatizerSettings lsett) : this(lsett)
+        {
             AddMultextFile(srIn, sFormat);
         }
-        
+
+        public Lemmatizer(BinaryReader binRead)
+        {
+            var compr = (Compression)binRead.ReadByte();
+            if (compr == Compression.None)
+                Deserialize(binRead);
+            else
+                throw new Exception("Loading lemmatizer with binary reader on uncompressed stream is not supported.");
+        }
+
+        public Lemmatizer(Stream streamIn)
+        {
+            Deserialize(streamIn);
+        }
 
         // Private Properties -----------------
 
-        private LemmaTreeNode LtrRootNodeSafe {
-            get {
-                if (LtnRootNode == null){ BuildModel();}
+        private LemmaTreeNode LtrRootNodeSafe
+        {
+            get
+            {
+                if (LtnRootNode == null) { BuildModel(); }
                 return LtnRootNode;
             }
         }
-        private LemmaTreeNode LtrRootNodeFrontSafe {
-            get {
-                if (LtnRootNodeFront == null && Lsett.bBuildFrontLemmatizer){ BuildModel();}
+        private LemmaTreeNode LtrRootNodeFrontSafe
+        {
+            get
+            {
+                if (LtnRootNodeFront == null && Lsett.bBuildFrontLemmatizer) { BuildModel(); }
                 return LtnRootNodeFront;
             }
         }
 
-        
+
         // Public Properties ------------------
 
-        public LemmatizerSettings Settings{
-            get{
+        public LemmatizerSettings Settings
+        {
+            get
+            {
                 return Lsett.CloneDeep();
             }
         }
-        public ExampleList Examples {
-            get {
+        public ExampleList Examples
+        {
+            get
+            {
                 return ElExamples;
             }
         }
-        public RuleList Rules {
-            get {
+        public RuleList Rules
+        {
+            get
+            {
                 return ElExamples.Rules;
             }
         }
-        public LemmaTreeNode RootNode {
-            get {
+        public LemmaTreeNode RootNode
+        {
+            get
+            {
                 return LtrRootNodeSafe;
             }
         }
-        public LemmaTreeNode RootNodeFront {
-            get {
+        public LemmaTreeNode RootNodeFront
+        {
+            get
+            {
                 return LtrRootNodeFrontSafe;
             }
         }
-        public ILemmatizerModel Model {
-            get {
+        public ILemmatizerModel Model
+        {
+            get
+            {
                 return LtrRootNodeSafe;
             }
         }
 
-        
+
         // Essential Class Functions (adding examples to repository) ----------
 
-        public void AddMultextFile(StreamReader srIn, string sFormat) {
+        public void AddMultextFile(StreamReader srIn, string sFormat)
+        {
             this.ElExamples.AddMultextFile(srIn, sFormat);
             LtnRootNode = null;
         }
-        public void AddExample(string sWord, string sLemma) {
+        public void AddExample(string sWord, string sLemma)
+        {
             AddExample(sWord, sLemma, 1, null);
         }
-        public void AddExample(string sWord, string sLemma, double dWeight) {
+        public void AddExample(string sWord, string sLemma, double dWeight)
+        {
             AddExample(sWord, sLemma, dWeight, null);
         }
-        public void AddExample(string sWord, string sLemma, double dWeight, string sMsd) {
+        public void AddExample(string sWord, string sLemma, double dWeight, string sMsd)
+        {
             ElExamples.AddExample(sWord, sLemma, dWeight, sMsd);
             LtnRootNode = null;
         }
 
-        public void DropExamples() {
+        public void DropExamples()
+        {
             ElExamples.DropExamples();
         }
 
         public void AddException(string word, string lemma)
         {
-            if (!this.Exceptions.ContainsKey(word.ToLower()))
+            var wordLower = word.ToLower();
+            if (!this.Exceptions.ContainsKey(wordLower))
             {
-                this.Exceptions.Add(word.ToLower(), lemma.ToLower());
+                var lemmaLower = lemma.ToLower();
+                this.Exceptions.AddOrUpdate(wordLower, lemmaLower, (key, val) => lemmaLower);
             }
         }
 
-        public void FinalizeAdditions() {
+        public void FinalizeAdditions()
+        {
             ElExamples.FinalizeAdditions();
         }
 
-        
+
         // Essential Class Functions (building model & lemmatizing) ----------
 
-        public void BuildModel() {
-            if (LtnRootNode != null){ return;}
+        public void BuildModel()
+        {
+            if (LtnRootNode != null) { return; }
 
-            if (!Lsett.bBuildFrontLemmatizer) {
+            if (!Lsett.bBuildFrontLemmatizer)
+            {
                 //TODO remove: elExamples.FinalizeAdditions();
                 ElExamples.FinalizeAdditions();
                 LtnRootNode = new LemmaTreeNode(Lsett, ElExamples);
             }
-            else {
+            else
+            {
                 LtnRootNode = new LemmaTreeNode(Lsett, ElExamples.GetFrontRearExampleList(false));
-                LtnRootNodeFront = new LemmaTreeNode(Lsett, ElExamples.GetFrontRearExampleList(true));   
+                LtnRootNodeFront = new LemmaTreeNode(Lsett, ElExamples.GetFrontRearExampleList(true));
             }
         }
 
-        public string Lemmatize(string word) {
-            if (this.Exceptions.ContainsKey(word.ToLower()))
+        public string Lemmatize(string word)
+        {
+            var wordLower = word.ToLower();
+            if (this.Exceptions.ContainsKey(wordLower))
             {
-                return this.Exceptions[word.ToLower()];
+                return this.Exceptions[wordLower];
             }
 
             if (!Lsett.bBuildFrontLemmatizer)
@@ -156,23 +203,25 @@ namespace LemmaSharp.Classes {
                 return LtrRootNodeSafe.Lemmatize(sWordRear);
             }
         }
-        
+
 
         // Serialization Functions (ISerializable) ---------------------------
 
-        public void GetObjectData(SerializationInfo info, StreamingContext context) {
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
             info.AddValue("lsett", Lsett);
             info.AddValue("elExamples", ElExamples);
             info.AddValue("exceptions", Exceptions);
         }
-        public Lemmatizer(SerializationInfo info, StreamingContext context): this() {
+        public Lemmatizer(SerializationInfo info, StreamingContext context) : this()
+        {
             Lsett = (LemmatizerSettings)info.GetValue("lsett", typeof(LemmatizerSettings));
             ElExamples = (ExampleList)info.GetValue("elExamples", typeof(ExampleList));
-            Exceptions = (Dictionary<string, string>) info.GetValue("exceptions", typeof (Dictionary<string, string>));
+            Exceptions = (ConcurrentDictionary<string, string>)info.GetValue("exceptions", typeof(Dictionary<string, string>));
             this.BuildModel();
         }
 
-        
+
         // Serialization Functions (Regular) ------------
 
         public void Serialize(StreamWriter sWrt, bool bSerializeExamples)
@@ -203,21 +252,23 @@ namespace LemmaSharp.Classes {
 
         // Serialization Functions (Binary) ------------
 
-        public void Serialize(BinaryWriter binWrt, bool bSerializeExamples) {
+        public void Serialize(BinaryWriter binWrt, bool bSerializeExamples)
+        {
             // settings
             Lsett.Serialize(binWrt);
 
             // examples
             binWrt.Write(bSerializeExamples);
             ElExamples.Serialize(binWrt, bSerializeExamples, false);
-            if (!bSerializeExamples) {
+            if (!bSerializeExamples)
+            {
                 ElExamples.GetFrontRearExampleList(false).Serialize(binWrt, bSerializeExamples, false);
                 ElExamples.GetFrontRearExampleList(true).Serialize(binWrt, bSerializeExamples, false);
             }
 
             // root node
             LtrRootNodeSafe.Serialize(binWrt);
-            
+
             // root node front
             if (Lsett.bBuildFrontLemmatizer)
             {
@@ -231,78 +282,78 @@ namespace LemmaSharp.Classes {
                 binWrt.Write(string.Format("{0} {1}", exception.Key, exception.Value));
             }
         }
-        public void Deserialize(BinaryReader binRead) {
-            // serttings
-            Lsett = new LemmatizerSettings(binRead);
-
-            // examples
-            bool bSerializeExamples = binRead.ReadBoolean();
-            ElExamples = new ExampleList(binRead, Lsett);
-            ExampleList elExamplesRear;
-            ExampleList elExamplesFront;
-            if (bSerializeExamples) {
-                elExamplesRear = ElExamples.GetFrontRearExampleList(false);
-                elExamplesFront = ElExamples.GetFrontRearExampleList(true);
-            }
-            else {
-                elExamplesRear = new ExampleList(binRead, Lsett);
-                elExamplesFront = new ExampleList(binRead, Lsett);
-            }                
-
-            // root node
-            LtnRootNode = new LemmaTreeNode(binRead, Lsett, Lsett.bBuildFrontLemmatizer ? elExamplesRear : ElExamples, null);
-
-            // root node front
-            if (Lsett.bBuildFrontLemmatizer) {
-                LtnRootNodeFront = new LemmaTreeNode(binRead, Lsett, elExamplesFront, null);
-            }
-
-            // exceptions - use try catch for retro compatibility
-            // --> this section is missing in the old lemmatizer files
-            try
+        public void Deserialize(BinaryReader binRead)
+        {
+            using (binRead)
             {
-                var nbOfExceptions = binRead.ReadInt32();
-                for (var i = 0; i < nbOfExceptions; i++)
+                // settings
+                Lsett = new LemmatizerSettings(binRead);
+
+                // examples
+                bool bSerializeExamples = binRead.ReadBoolean();
+                ElExamples = new ExampleList(binRead, Lsett);
+                ExampleList elExamplesRear;
+                ExampleList elExamplesFront;
+                if (bSerializeExamples)
                 {
-                    var exception = binRead.ReadString();
-                    var parts = exception.Split(' ');
-                    this.AddException(parts[0], parts[1]);
+                    elExamplesRear = ElExamples.GetFrontRearExampleList(false);
+                    elExamplesFront = ElExamples.GetFrontRearExampleList(true);
                 }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Couldn't deserialize exceptions in Lemmatizer file");
+                else
+                {
+                    elExamplesRear = new ExampleList(binRead, Lsett);
+                    elExamplesFront = new ExampleList(binRead, Lsett);
+                }
+
+                // root node
+                LtnRootNode = new LemmaTreeNode(binRead, Lsett, Lsett.bBuildFrontLemmatizer ? elExamplesRear : ElExamples, null);
+
+                // root node front
+                if (Lsett.bBuildFrontLemmatizer)
+                {
+                    LtnRootNodeFront = new LemmaTreeNode(binRead, Lsett, elExamplesFront, null);
+                }
+
+                // exceptions - use try catch for retro compatibility
+                // --> this section is missing in the old lemmatizer files
+                try
+                {
+                    var nbOfExceptions = binRead.ReadInt32();
+                    for (var i = 0; i < nbOfExceptions; i++)
+                    {
+                        var exception = binRead.ReadString();
+                        var parts = exception.Split(' ');
+                        this.AddException(parts[0], parts[1]);
+                    }
+                }
+                catch (Exception)
+                {
+                    Trace.WriteLine("Couldn't deserialize exceptions in Lemmatizer file");
+                }
             }
         }
 
         //Do not change the order!!! (If new compression algorithms are added, otherwise you will not be able to load old files.)
-        public enum Compression {
+        public enum Compression
+        {
             None,
             Deflate,
             Lzma
         }
 
-        public Lemmatizer(BinaryReader binRead) {
-            var compr = (Compression)binRead.ReadByte();
-            if (compr == Compression.None)
-                Deserialize(binRead);
-            else
-                throw new Exception("Loading lemmatizer with binary reader on uncompressed stream is not supported.");
-        }
-        public Lemmatizer(Stream streamIn){
-            Deserialize(streamIn);
-        }
-
-        public void Serialize(Stream streamOut, bool asBinaries) {
+        public void Serialize(Stream streamOut, bool asBinaries)
+        {
             Serialize(streamOut, true, Compression.None, asBinaries);
         }
-        public void Serialize(Stream streamOut, bool bSerializeExamples, bool asBinaries) {
+        public void Serialize(Stream streamOut, bool bSerializeExamples, bool asBinaries)
+        {
             Serialize(streamOut, bSerializeExamples, Compression.None, asBinaries);
         }
-        public void Serialize(Stream streamOut, bool bSerializeExamples, Compression compress, bool asBinaries) {
+        public void Serialize(Stream streamOut, bool bSerializeExamples, Compression compress, bool asBinaries)
+        {
             if (asBinaries)
             {
-                streamOut.WriteByte((byte) compress);
+                streamOut.WriteByte((byte)compress);
             }
             else
             {
@@ -325,7 +376,8 @@ namespace LemmaSharp.Classes {
             }
         }
 
-        private void SerializeNone(Stream streamOut, bool bSerializeExamples, bool asBinaries) {
+        private void SerializeNone(Stream streamOut, bool bSerializeExamples, bool asBinaries)
+        {
             if (asBinaries)
             {
                 var binWrt = new BinaryWriter(streamOut);
@@ -337,7 +389,8 @@ namespace LemmaSharp.Classes {
                 this.Serialize(sWrt, bSerializeExamples);
             }
         }
-        private void SerializeDeflate(Stream streamOut, bool bSerializeExamples, bool asBinaries) {
+        private void SerializeDeflate(Stream streamOut, bool bSerializeExamples, bool asBinaries)
+        {
             Stream streamOutNew = new DeflateStream(streamOut, CompressionMode.Compress, true);
             if (asBinaries)
             {
@@ -354,18 +407,19 @@ namespace LemmaSharp.Classes {
                 sWrt.Close();
             }
         }
-        private void SerializeLzma(Stream streamOut, bool bSerializeExamples, bool asBinaries) {
-            CoderPropID[] propIDs = 
-				{
-					CoderPropID.DictionarySize,
-					CoderPropID.PosStateBits,
-					CoderPropID.LitContextBits,
-					CoderPropID.LitPosBits,
-					CoderPropID.Algorithm,
-					CoderPropID.NumFastBytes,
-					CoderPropID.MatchFinder,
-					CoderPropID.EndMarker
-				};
+        private void SerializeLzma(Stream streamOut, bool bSerializeExamples, bool asBinaries)
+        {
+            CoderPropID[] propIDs =
+                {
+                    CoderPropID.DictionarySize,
+                    CoderPropID.PosStateBits,
+                    CoderPropID.LitContextBits,
+                    CoderPropID.LitPosBits,
+                    CoderPropID.Algorithm,
+                    CoderPropID.NumFastBytes,
+                    CoderPropID.MatchFinder,
+                    CoderPropID.EndMarker
+                };
 
             const int dictionary = 1 << 23;
             const int posStateBits = 2;
@@ -378,17 +432,17 @@ namespace LemmaSharp.Classes {
             const string mf = "bt4";
             const bool eos = false;
 
-            object[] properties = 
-				{
-					(Int32)(dictionary),
-					(Int32)(posStateBits),
-					(Int32)(litContextBits),
-					(Int32)(litPosBits),
-					(Int32)(algorithm),
-					(Int32)(numFastBytes),
-					mf,
-					eos
-				};
+            object[] properties =
+                {
+                    (Int32)(dictionary),
+                    (Int32)(posStateBits),
+                    (Int32)(litContextBits),
+                    (Int32)(litPosBits),
+                    (Int32)(algorithm),
+                    (Int32)(numFastBytes),
+                    mf,
+                    eos
+                };
 
             var msTemp = new MemoryStream();
             if (asBinaries)
@@ -403,7 +457,7 @@ namespace LemmaSharp.Classes {
                 Int64 fileSize = msTemp.Length;
                 for (int i = 0; i < 8; i++)
                 {
-                    streamOut.WriteByte((Byte) (fileSize >> (8*i)));
+                    streamOut.WriteByte((Byte)(fileSize >> (8 * i)));
                 }
                 encoder.Code(msTemp, streamOut, -1, -1, null);
                 binWrtTemp.Close();
@@ -421,7 +475,7 @@ namespace LemmaSharp.Classes {
                 Int64 fileSize = msTemp.Length;
                 for (int i = 0; i < 8; i++)
                 {
-                    streamOut.WriteByte((Byte) (fileSize >> (8*i)));
+                    streamOut.WriteByte((Byte)(fileSize >> (8 * i)));
                 }
                 encoder.Code(msTemp, streamOut, -1, -1, null);
                 sWrtTemp.Close();
@@ -429,15 +483,23 @@ namespace LemmaSharp.Classes {
             }
         }
 
-        public void Deserialize(Stream streamIn) {
-            var compr = (Compression)streamIn.ReadByte();
-            Stream streamInNew = Decompress(streamIn, compr);
-            var br = new BinaryReader(streamInNew);
-            Deserialize(br);
+        public void Deserialize(Stream streamIn)
+        {
+            using (streamIn)
+            {
+                var compr = (Compression)streamIn.ReadByte();
+                using (var streamInNew = Decompress(streamIn, compr))
+                using (var br = new BinaryReader(streamInNew))
+                {
+                    Deserialize(br);
+                }
+            }
         }
-        private Stream Decompress(Stream streamIn, Compression compress) {
+        private Stream Decompress(Stream streamIn, Compression compress)
+        {
             Stream streamInNew;
-            switch (compress) {
+            switch (compress)
+            {
                 case Compression.None:
                 default:
                     streamInNew = streamIn;
@@ -451,7 +513,8 @@ namespace LemmaSharp.Classes {
             }
             return streamInNew;
         }
-        private Stream DecompressLZMA(Stream streamIn) {
+        private Stream DecompressLZMA(Stream streamIn)
+        {
             var properties = new byte[5];
             if (streamIn.Read(properties, 0, 5) != 5)
                 throw (new Exception("input .lzma is too short"));
@@ -459,7 +522,8 @@ namespace LemmaSharp.Classes {
             decoder.SetDecoderProperties(properties);
 
             long outSize = 0;
-            for (int i = 0; i < 8; i++) {
+            for (int i = 0; i < 8; i++)
+            {
                 int v = streamIn.ReadByte();
                 if (v < 0)
                     throw (new Exception("Can't Read 1"));
@@ -473,10 +537,10 @@ namespace LemmaSharp.Classes {
             return outStream;
         }
 
-        
+
         // Serialization Functions (Latino) -------------------
-        
-        #if LATINO
+
+#if LATINO
 
         public void Save(Latino.BinarySerializer binWrt) {
             lsett.Save(binWrt);
@@ -521,6 +585,6 @@ namespace LemmaSharp.Classes {
 
 #endif
 
-        
+
     }
 }
