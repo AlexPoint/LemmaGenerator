@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Collections.Concurrent;
+using System.Linq;
 
 namespace LemmaSharp.Classes {
 
@@ -14,7 +16,7 @@ namespace LemmaSharp.Classes {
         private LemmatizerSettings lsett; 
 
         //tree structure references
-        private Dictionary<char, LemmaTreeNode> dictSubNodes;
+        private ConcurrentDictionary<char, LemmaTreeNode> dictSubNodes;
         private LemmaTreeNode ltnParentNode;
 
         //essential node properties
@@ -244,10 +246,18 @@ namespace LemmaSharp.Classes {
             var ltnSub = new LemmaTreeNode(lsett, elExamples, iStart, iEnd, this);
             
             //TODO - maybe not realy appropriate because loosing statisitcs from multiple possible rules
-            if (ltnSub.lrBestRule == lrBestRule && ltnSub.dictSubNodes == null){ return;}
+            if (ltnSub.lrBestRule == lrBestRule && ltnSub.dictSubNodes == null)
+            {
+                return;
+            }
 
-            if (dictSubNodes == null){ dictSubNodes = new Dictionary<char, LemmaTreeNode>();}
-            dictSubNodes.Add(chChar, ltnSub);
+            if (dictSubNodes == null)
+            {
+                dictSubNodes = new ConcurrentDictionary<char, LemmaTreeNode>();
+            }
+            
+            // if it already exists, keep current
+            dictSubNodes.TryAdd(chChar, ltnSub);
         }
 
         
@@ -393,13 +403,13 @@ namespace LemmaSharp.Classes {
             if (binRead.ReadBoolean())
             {
                 // read all dictionary (key + value)
-                dictSubNodes = new Dictionary<char, LemmaTreeNode>();
+                dictSubNodes = new ConcurrentDictionary<char, LemmaTreeNode>();
                 int iCount = binRead.ReadInt32();
                 for (int i = 0; i < iCount; i++)
                 {
                     char cKey = binRead.ReadChar();
                     var ltrSub = new LemmaTreeNode(binRead, this.lsett, elExamples, this);
-                    dictSubNodes.Add(cKey, ltrSub);
+                    dictSubNodes.TryAdd(cKey, ltrSub);
                 }
             }
             else
