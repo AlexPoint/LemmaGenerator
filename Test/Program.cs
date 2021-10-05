@@ -18,16 +18,29 @@ namespace Test
         {
             // Create readable file
             var currentDirectory = Directory.GetCurrentDirectory();
-            var dataFilePath = string.Format("{0}/{1}/{2}", currentDirectory, "../../Data/Custom", "full7z-mlteast-en-modified.lem");
+            var dataFilePath = string.Format("{0}/{1}/{2}", currentDirectory, "../../Data/Custom", "english2.lem");
+            //var dataFilePath = string.Format("{0}/{1}/{2}", currentDirectory, "../../Data/Custom", "full7z-mlteast-en-modified.lem");
 
+
+            var dataFilePath2 = string.Format("{0}/{1}/{2}", currentDirectory, "../../Data/Custom", "english2.lem");
             using (var fstream = File.OpenRead(dataFilePath))
             {
                 var lemmatizer = new Lemmatizer(fstream);
 
+                using (var outStream = File.OpenWrite(dataFilePath2))
+                {
+                    using (var writer = new BinaryWriter(outStream))
+                    {
+
+                        lemmatizer.Serialize(writer, true);
+                    }
+                }
+
+
                 // add examples
                 var examples = new List<Tuple<string, string>>()
                 {
-                    /*new Tuple<string,string>("acting","act"),
+                    new Tuple<string,string>("acting","act"),
                     new Tuple<string,string>("balled","ball"),
                     new Tuple<string,string>("balled","ball"),
                     new Tuple<string,string>("ballsed","balls"),
@@ -75,7 +88,7 @@ namespace Test
                     new Tuple<string,string>("vacuumed","vacuum"),
                     new Tuple<string,string>("whiled","while"),
                     new Tuple<string,string>("wigged","wig"),
-                    new Tuple<string,string>("zoned","zone"),*/
+                    new Tuple<string,string>("zoned","zone"),
                     new Tuple<string,string>("don't","do"),
                     new Tuple<string,string>("doesn't","do"),
                     new Tuple<string,string>("didn't","did"),
